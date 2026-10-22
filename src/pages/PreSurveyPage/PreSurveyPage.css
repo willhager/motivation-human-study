@@ -1,0 +1,15 @@
+.input-short{
+    margin-left: 5px;
+}
+
+.consent-embedding{
+    width: 80%;
+    height: 600px;;
+    align-self: center;
+    border-radius: 20px;
+}
+
+.error-message{
+    color: red;
+    
+}
