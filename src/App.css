@@ -1,29 +1,40 @@
 .page{
     margin-top: 5rem;
-    margin-left: 15rem;
-    margin-right: 15rem;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    
 }
 
 .box {
-  width: max;
+  width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
   color: var(--main-contrast);
   padding: 30px;
+  box-sizing: border-box;
 }
 
 .box-internal {
-  width: max;
+  width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
   border-radius: 16px;
-  margin: 5px 20px;
+  margin: 20px 0px 20px 0px;;
   color: var(--main-contrast);
   border: 2px dashed var(--main-contrast);
   background-color: white;
   padding: 30px;
+  box-sizing: border-box;
+}
+
+.box-internal textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
 }
 
 .row-centered{
@@ -54,6 +65,7 @@
   transform: scale(1.05);
   cursor: pointer;
 }
+
 
 .no-bottom-margin{
   margin-bottom: 0px;
