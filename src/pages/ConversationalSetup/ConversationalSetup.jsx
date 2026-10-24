@@ -20,7 +20,7 @@ function ConversationalSetup({studyState}) {
     useEffect(() => {
         const timer = setTimeout(() => {
         navigate("/6", { replace: true, state: { username, prolificID } });
-        }, 2 * 60 * 1000);
+        }, 2 * 6 * 1000);
 
         return () => clearTimeout(timer);
     }, [navigate, username, prolificID]);
@@ -34,6 +34,7 @@ function ConversationalSetup({studyState}) {
                 </div>
                 <div className="box-internal">
                     <p>{conditionText}</p>
+                    <p>This page will automatically redirect you to the next part of the study.</p>
                 </div>
             </div>
         </div>

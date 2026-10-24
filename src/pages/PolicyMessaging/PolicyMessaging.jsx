@@ -20,7 +20,7 @@ function PolicyMessaging({studyState}) {
     useEffect(() => {
         const timer = setTimeout(() => {
         navigate("/5", { replace: true, state: { username, prolificID } });
-        }, 2 * 60 * 1000);
+        }, 2 * 6 * 1000);
 
         return () => clearTimeout(timer);
     }, [navigate, username, prolificID]);
@@ -35,6 +35,7 @@ function PolicyMessaging({studyState}) {
                 <div className="box-internal">
                     <h3 className="no-bottom-margin">Policy:</h3>
                     <p>{policyText}</p>
+                    <p>This page will automatically redirect you to the next part of the study.</p>
                 </div>
             </div>
         </div>

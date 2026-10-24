@@ -7,6 +7,13 @@ import Inactive from "./pages/InactivePage/Inactive";
 import Waiting from "./pages/Waiting/Waiting";
 import PolicyMessaging from "./pages/PolicyMessaging/PolicyMessaging";
 import ConversationalSetup from "./pages/ConversationalSetup/ConversationalSetup";
+import Conversation from "./pages/Conversation/Conversation";
+import PostSurvey from "./pages/PostSurvey/PostSurvey";
+import PostSurveyOpen1 from "./pages/PostSurveyOpen1/PostSurveyOpen1";
+import PostSurveyOpen2 from "./pages/PostSurveyOpen2/PostSurveyOpen2";
+import PostSurveySuspicion from "./pages/PostSurveySuspicion/PostSurveySuspicion";
+import Debrief from "./pages/Debrief/Debrief"
+
 import "./App.css";
 
 function App() {
@@ -45,6 +52,12 @@ function App() {
           <Route path="/3" element={<Waiting studyState={studyState}/>} />
           <Route path="/4" element={<PolicyMessaging studyState={studyState} />}/>
           <Route path="/5" element={<ConversationalSetup studyState={studyState} />}/>
+          <Route path="/6" element={<Conversation studyState={studyState} />}/>
+          <Route path="/7" element={<PostSurvey studyState={studyState} />}/>
+          <Route path="/8" element={<PostSurveyOpen1 studyState={studyState}/>}/>
+          <Route path="/9" element={<PostSurveyOpen2 studyState={studyState}/>}/>
+          <Route path="/10" element={<PostSurveySuspicion studyState={studyState}/>}/>
+          <Route path="/11" element={<Debrief studyState={studyState}/>}/>
         </Routes>
       </BrowserRouter>
     );
