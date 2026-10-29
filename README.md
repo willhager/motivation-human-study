@@ -17,3 +17,5 @@ arrived ∈ integers tracks how many people have arrived at the second waiting r
 arrivedIDs = [] tracks which IDs have arrived at the second waiting room (to avoid double-counting people on connection drops or page reloads)
 
 participants ∈ integers sets how many participants have to arrive at the second waiting room before all participants are sent to the policy messaging
+
+arrived and arrivedIDs (currently, not permanently) need to be manually reset after each testing round.
