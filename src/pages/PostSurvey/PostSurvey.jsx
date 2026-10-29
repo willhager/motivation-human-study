@@ -6,7 +6,6 @@ function PostSurvey({ studyState }) {
     const [classroomAIAttitude, setClassroomAIAttitude] = useState(null);
     const [initialKnowledge, setInitialKnowledge] = useState(null);
     const [policyOpinion, setPolicyOpinion] = useState(null);
-    const [opinionImportance, setOpinionImportance] = useState(null);
     const [partnerCredibility, setPartnerCredibility] = useState(null);
     const [attentionCheck, setAttentionCheck] = useState(null);
 
@@ -19,7 +18,7 @@ function PostSurvey({ studyState }) {
     const {username, prolificID} = state.state;
 
     const on_button_clicked = async () => {
-        if (generalAIAttitude == null || classroomAIAttitude == null || initialKnowledge == null || policyOpinion == null || opinionImportance == null || partnerCredibility == null || attentionCheck == null) {
+        if (generalAIAttitude == null || classroomAIAttitude == null || initialKnowledge == null || policyOpinion == null || partnerCredibility == null || attentionCheck == null) {
             setErrorText("Please answer all questions on this page");
         }
         else {
@@ -50,7 +49,6 @@ function PostSurvey({ studyState }) {
                     classroomAIAttitude,
                     initialKnowledge,
                     policyOpinion,
-                    opinionImportance,
                     partnerCredibility,
                     attentionCheck,
                     timestamp: new Date().toISOString(),
@@ -145,25 +143,6 @@ function PostSurvey({ studyState }) {
                                 value={value}
                                 checked={policyOpinion === value}
                                 onChange={() => setPolicyOpinion(value)}
-                                />
-                                <p>{value}</p>
-                            </div>
-                            );
-                        })}
-                    </div>
-
-                    <p>On a scale from 1-7, where 1 = “Not important at all” and 7 = “Extremely important”, how important is your opinion on AI usage to you?</p>
-                    <div className="row-centered">
-                        {Array.from({ length: 7 }, (_, i) => {
-                            const value = i + 1;
-                            return (
-                            <div className="likert-item" key={value}>
-                                <input
-                                type="radio"
-                                name="opinionImportance"
-                                value={value}
-                                checked={opinionImportance === value}
-                                onChange={() => setOpinionImportance(value)}
                                 />
                                 <p>{value}</p>
                             </div>
