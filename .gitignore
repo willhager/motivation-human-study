@@ -27,3 +27,6 @@ dist-ssr
 .netlify
 
 .env
+
+# added mongo sync stuff
+mongo-box-sync/*
