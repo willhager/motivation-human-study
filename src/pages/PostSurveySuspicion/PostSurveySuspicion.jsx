@@ -12,7 +12,8 @@ function PostSurveyBelievability() {
 
     const on_button_clicked = async () => {
         if (!believabilityScore) {
-            setErrorMessage("Please ensure you've responded to all questions on the page.")
+            setErrorMessage("Please ensure you've responded to all questions on the page.");
+            return;
         }
         else {
             const ok = await save();

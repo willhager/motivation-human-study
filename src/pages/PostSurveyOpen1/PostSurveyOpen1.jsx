@@ -12,6 +12,7 @@ function PostSurveyOpen1({studyState}) {
     const on_button_clicked = async () => {
         if (comments == null || comments == "") {
             setErrorMessage("You must respond to the question to continue");
+            return;
         }
         const id = await save()
         if (id){

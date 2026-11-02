@@ -1,0 +1,92 @@
+.conversation-item {
+    background-color: lightblue;
+    border: 2px solid blue;
+    border-radius: 8px;
+    align-self: start;
+    padding: 10px 20px;
+    margin: 5px 20px;
+    min-width: 30%;
+}
+
+.conversation-item.self {
+    background-color: lightgreen;
+    border: 2px solid green;
+    align-self: end;
+    padding: 0px 10px;
+}
+
+.conversation-item-header-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+.conversation-item-header-row h4{
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.conversation-item p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.conversation-box-internal {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  margin: 20px 0px 20px 0px;;
+  color: var(--main-contrast);
+  border: 2px dashed var(--main-contrast);
+  background-color: white;
+  padding: 30px;
+  box-sizing: border-box;
+  max-height: 90vm;
+}
+
+.conversation-row-centered {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    align-self: center;
+    gap: 15px;
+    width: 80%;
+}
+
+.conversation-next-button {
+    border-radius: 10px;
+    border: 1px solid var(--main-contrast);
+    background-color: var(--main-contrast);
+    color: var(--main-background);
+    font-size: 1.5rem;
+    padding: 5px 8px;
+    transition: transform 0.2s ease;
+    align-self: center;
+    cursor: pointer;
+}
+
+.header-absolute {
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.time-remaining-box{
+    margin: 10px;
+    padding: 0px 10px;
+    border-radius: 16px;
+    background-color: lightgrey;
+    border: 2px solid darkgray;
+}
+

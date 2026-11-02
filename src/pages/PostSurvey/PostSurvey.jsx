@@ -15,7 +15,7 @@ function PostSurvey({ studyState }) {
 
     const navigate = useNavigate();
     const state = useLocation();
-    const {username, prolificID} = state.state;
+    const {username, prolificID, secondsTyping} = state.state;
 
     const on_button_clicked = async () => {
         if (generalAIAttitude == null || classroomAIAttitude == null || initialKnowledge == null || policyOpinion == null || partnerCredibility == null || attentionCheck == null) {
@@ -51,6 +51,7 @@ function PostSurvey({ studyState }) {
                     policyOpinion,
                     partnerCredibility,
                     attentionCheck,
+                    secondsTyping,
                     timestamp: new Date().toISOString(),
                 }),
             });

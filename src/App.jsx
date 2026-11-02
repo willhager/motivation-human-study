@@ -49,7 +49,7 @@ function App() {
           <Route path="/" element={<PreSurveyPage />} />
           <Route path="/1" element={<Primes studyState={studyState} />} />
           <Route path="/2" element={<AIOpinionImportance studyState={studyState} />}/>
-          <Route path="/3" element={<Waiting studyState={studyState}/>} />
+          <Route path="/3" element={<Waiting studyState={studyState} />}/>
           <Route path="/4" element={<PolicyMessaging studyState={studyState} />}/>
           <Route path="/5" element={<ConversationalSetup studyState={studyState} />}/>
           <Route path="/6" element={<Conversation studyState={studyState} />}/>
