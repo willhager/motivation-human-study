@@ -7,16 +7,28 @@ function Conversation( { studyState } ) {
     let navigate = useNavigate();
     const state = useLocation();
     const id = studyState.id;
-    const {username, prolificID} = state.state;
+    const {username, uID} = state.state;
     const [conversation, setConversation] = useState([]);
     const [userResponse, setUserResponse] = useState("");
 
+    const typingStartRef = useRef(null);
+    const secondsTypingRef = useRef([]);
+
     const TOTAL_SECONDS = 600;
-    const [deadline] = useState(() => Date.now() + TOTAL_SECONDS * 1000);
+
+    const [deadline] = useState(() => {
+        const key = `deadline-${uID}`;
+        const saved = localStorage.getItem(key);
+        if (saved) {
+            return Number(saved);
+        }
+        const newDeadline = Date.now() + TOTAL_SECONDS * 1000;
+        localStorage.setItem(key, String(newDeadline));
+        return newDeadline;
+    });    
+
     const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
 
-    const [typingClock, setTypingClock] = useState(null);
-    const [secondsTyping, setSecondsTyping] = useState(0);
     const bottomRef = useRef(null);
 
     const minutes = Math.floor(secondsLeft / 60);
@@ -49,7 +61,7 @@ function Conversation( { studyState } ) {
                 },
                 body: JSON.stringify({
                     username,
-                    prolificID,
+                    uID,
                     response,
                     timestamp: new Date().toISOString()
                 }),
@@ -66,12 +78,9 @@ function Conversation( { studyState } ) {
         if (response.trim() === "" || response === null) {
             return;
         }
-        let elapsed = 0;
-        if (typingClock !== null) {
-            elapsed = typingClock - secondsLeft;
-            setSecondsTyping((prev) => prev + elapsed);
-        }
-        setTypingClock(null);
+        const elapsed = typingStartRef.current ? (Date.now() - typingStartRef.current) / 1000 : 0;
+        typingStartRef.current = null;
+        secondsTypingRef.current.push(elapsed);
         setUserResponse("");
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });
         await updateConversation(response);
@@ -79,7 +88,6 @@ function Conversation( { studyState } ) {
     }
 
     const handleKeyDown = (e) => {
-
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
             send_update(userResponse);
@@ -87,8 +95,8 @@ function Conversation( { studyState } ) {
     }
 
     const updateUserResponse = (content)  => {
-        if (typingClock === null && content !== ""){
-            setTypingClock(secondsLeft);
+        if (typingStartRef.current === null){
+            typingStartRef.current = Date.now();
         }
         setUserResponse(content);
     }
@@ -111,9 +119,10 @@ function Conversation( { studyState } ) {
 
     useEffect(() => {
         if (secondsLeft <= 0) {
-            navigate("/7", { replace: true, state: { username, prolificID, secondsTyping} });
+            localStorage.removeItem(`deadline-${uID}`);
+            navigate("/7", { replace: true, state: { username, uID, secondsTyping : secondsTypingRef.current} });
         }
-    }, [secondsLeft, navigate, username, prolificID]);
+    }, [secondsLeft, navigate, username, uID]);
 
 
     return (
@@ -127,7 +136,7 @@ function Conversation( { studyState } ) {
                 <div className="box-internal conversation">
                     {conversation.map((item, index) => {
                         let isSelf = "";
-                        if (item.prolificID === prolificID) {
+                        if (item.uID === uID) {
                             isSelf = "self";
                         }
 

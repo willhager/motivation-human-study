@@ -7,7 +7,7 @@ function Debrief({ studyState }) {
     const [buttonText, setButtonText] = useState("Withdraw my data")
 
     const state = useLocation();
-    const {username, prolificID} = state.state;
+    const {username, uID} = state.state;
 
     const on_button_clicked = async () => {
         setButtonText("Loading...");
@@ -19,7 +19,7 @@ function Debrief({ studyState }) {
                 },
                 body: JSON.stringify({
                     username,
-                    prolificID
+                    uID
                 }),
             });
 

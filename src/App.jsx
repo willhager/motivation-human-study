@@ -46,7 +46,7 @@ function App() {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<PreSurveyPage />} />
+          <Route path="/" element={<PreSurveyPage studyState={studyState} />} />
           <Route path="/1" element={<Primes studyState={studyState} />} />
           <Route path="/2" element={<AIOpinionImportance studyState={studyState} />}/>
           <Route path="/3" element={<Waiting studyState={studyState} />}/>

@@ -15,7 +15,10 @@ function PostSurvey({ studyState }) {
 
     const navigate = useNavigate();
     const state = useLocation();
-    const {username, prolificID, secondsTyping} = state.state;
+    const {username, uID, secondsTyping} = state.state;
+
+    const likerts_support = ["Strongly Oppose", "Moderately Oppose", "Slightly Oppose", "Neither Oppose nor Support", "Slightly Support", "Moderately Support", "Strongly Support"];
+    const likerts_opinion = ["Strongly Disagree", "Moderately Disagree", "Slightly Disagree", "Neither Agree nor Disagree", "Slightly Agree", "Moderately Agree", "Strongly Agree"];
 
     const on_button_clicked = async () => {
         if (generalAIAttitude == null || classroomAIAttitude == null || initialKnowledge == null || policyOpinion == null || partnerCredibility == null || attentionCheck == null) {
@@ -24,7 +27,7 @@ function PostSurvey({ studyState }) {
         else {
             const id = await save();
             if (id){
-                navigate("/8", {replace: true, state: {username, prolificID, insertedID: id}});
+                navigate("/8", {replace: true, state: {username, uID, insertedID: id}});
             }
         }
     }
@@ -42,7 +45,7 @@ function PostSurvey({ studyState }) {
                 },
                 body: JSON.stringify({
                     username,
-                    prolificID,
+                    uID,
                     condition,
                     policy,
                     generalAIAttitude,
@@ -89,10 +92,12 @@ function PostSurvey({ studyState }) {
                                 onChange={() => setGeneralAIAttitude(value)}
                                 />
                                 <p>{value}</p>
+                                <p>{likerts_opinion[value - 1]}</p>
                             </div>
                             );
                         })}
                     </div>
+                    <br></br>
 
                     <p>On a scale from 1-7, where 1 = “Strongly Disagree” and 7 = “Strongly Agree”, what is your current stance towards generative AI, specifically in a University setting?</p>
                     <div className="row-centered">
@@ -108,10 +113,12 @@ function PostSurvey({ studyState }) {
                                 onChange={() => setClassroomAIAttitude(value)}
                                 />
                                 <p>{value}</p>
+                                <p>{likerts_opinion[value - 1]}</p>
                             </div>
                             );
                         })}
                     </div>
+                    <br></br>
 
                     <p>On a scale from 1-7, where 1 = “No knowledge” and 7 = “Expert knowledge”, how knowledgeable are you about generative AI usage?</p>
                     <div className="row-centered">
@@ -127,10 +134,12 @@ function PostSurvey({ studyState }) {
                                 onChange={() => setInitialKnowledge(value)}
                                 />
                                 <p>{value}</p>
+                                <p>test level of knowledge</p>
                             </div>
                             );
                         })}
                     </div>
+                    <br></br>
 
                     <p>On a scale from 1-7, where 1 = “Strongly Disapprove” and 7 = “Strongly Support”, what is your stance on the AI policy the University is considering?</p>
                     <div className="row-centered">
@@ -146,10 +155,12 @@ function PostSurvey({ studyState }) {
                                 onChange={() => setPolicyOpinion(value)}
                                 />
                                 <p>{value}</p>
+                                <p>test level of approval</p>
                             </div>
                             );
                         })}
                     </div>
+                    <br></br>
 
                     <p>On a scale from 1-7, where 1 = “Not credible at all” and 7 = “Extremely credible”, how credible did the individual with whom you conversed seem in your opinion?</p>
                     <div className="row-centered">
@@ -165,10 +176,12 @@ function PostSurvey({ studyState }) {
                                 onChange={() => setPartnerCredibility(value)}
                                 />
                                 <p>{value}</p>
+                                <p>test level of support</p>
                             </div>
                             );
                         })}
                     </div>
+                    <br></br>
 
                     <p>Was the policy that you read and discussed pro-AI in the classrooms or anti-AI in the classrooms?</p>
                     <div className="row-centered">

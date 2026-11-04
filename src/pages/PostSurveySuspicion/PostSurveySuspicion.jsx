@@ -8,7 +8,7 @@ function PostSurveyBelievability() {
 
     const navigate = useNavigate();
     const state = useLocation();
-    const {username, prolificID, insertedID} = state.state;
+    const {username, uID, insertedID} = state.state;
 
     const on_button_clicked = async () => {
         if (!believabilityScore) {
@@ -18,7 +18,7 @@ function PostSurveyBelievability() {
         else {
             const ok = await save();
             if (ok){
-                navigate("/11", {replace: true, state: {username, prolificID}});
+                navigate("/11", {replace: true, state: {username, uID}});
             }
         }
     }

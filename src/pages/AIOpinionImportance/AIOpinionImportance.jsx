@@ -8,9 +8,11 @@ function AIOpinionImportance({ studyState }) {
     const [errorMessage, setErrorMessage] = useState(null);
     const [buttonText, setButtonText] = useState("Continue");
 
+    const likert_values = ["text1 text1 text1", "text2 text2 text2", "text3 text3 text3", "text4 text4 text4", "text5 text5 text5", "text6 text6", "text7 text7"];
+
     const navigate = useNavigate();
     const state = useLocation();
-    const {username, prolificID, insertedID} = state.state;
+    const {username, uID, insertedID} = state.state;
 
     const on_button_clicked = async () => {
         if (!opinionStrength) {
@@ -19,7 +21,7 @@ function AIOpinionImportance({ studyState }) {
         else {
             const ok = await save();
             if (ok){
-                navigate("/3", {replace: true, state: {username, prolificID}});
+                navigate("/3", {replace: true, state: {username, uID}});
             }
         }
     }
@@ -69,6 +71,7 @@ function AIOpinionImportance({ studyState }) {
                                 onChange={() => setopinionStrength(value)}
                                 />
                                 <p>{value}</p>
+                                <p>{likert_values[value - 1]}</p>
                             </div>
                             );
                         })}

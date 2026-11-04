@@ -10,10 +10,10 @@ function Primes({ studyState }) {
 
     const navigate = useNavigate();
 
-    if (!state.state?.username || !state.state?.prolificID) {
+    if (!state.state?.username || !state.state?.uID) {
         return <Navigate to="/" replace />;
     }
-    const { username, prolificID } = state.state;
+    const { username, uID } = state.state;
 
 
     const on_button_clicked = async () => {
@@ -23,7 +23,7 @@ function Primes({ studyState }) {
         else {
             const id = await save();
             if (id){
-                navigate("/2", {replace: true, state: {username, prolificID, insertedID: id}});
+                navigate("/2", {replace: true, state: {username, uID, insertedID: id}});
             }
         }
     }
@@ -34,7 +34,7 @@ function Primes({ studyState }) {
         let condition = studyState.condition
         if (studyState.condition == "directional"){
             body = JSON.stringify({
-                    prolificID,
+                    uID,
                     username,
                     response1,
                     response2,
@@ -44,7 +44,7 @@ function Primes({ studyState }) {
         }
         else {
             body = JSON.stringify({
-                    prolificID,
+                    uID,
                     username,
                     response1,
                     condition,

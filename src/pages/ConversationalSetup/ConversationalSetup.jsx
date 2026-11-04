@@ -4,7 +4,7 @@ import { useEffect } from "react";
 function ConversationalSetup({studyState}) {
     const navigate = useNavigate();
     const state = useLocation();
-    const {username, prolificID} = state.state;
+    const {username, uID} = state.state;
     const condition = studyState.condition;
 
     let conditionText = ""
@@ -19,11 +19,11 @@ function ConversationalSetup({studyState}) {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-        navigate("/6", { replace: true, state: { username, prolificID } });
+        navigate("/6", { replace: true, state: { username, uID } });
         }, 2 * 6 * 1000);
 
         return () => clearTimeout(timer);
-    }, [navigate, username, prolificID]);
+    }, [navigate, username, uID]);
 
 
     return (

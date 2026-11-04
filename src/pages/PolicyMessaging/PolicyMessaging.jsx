@@ -4,7 +4,7 @@ import { useEffect } from "react";
 function PolicyMessaging({studyState}) {
     const navigate = useNavigate();
     const state = useLocation();
-    const {username, prolificID} = state.state;
+    const {username, uID} = state.state;
     const policy = studyState.policy;
 
     let policyText = ""
@@ -19,11 +19,11 @@ function PolicyMessaging({studyState}) {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-        navigate("/5", { replace: true, state: { username, prolificID } });
+        navigate("/5", { replace: true, state: { username, uID } });
         }, 2 * 6 * 1000);
 
         return () => clearTimeout(timer);
-    }, [navigate, username, prolificID]);
+    }, [navigate, username, uID]);
 
 
     return (

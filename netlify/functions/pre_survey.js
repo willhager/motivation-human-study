@@ -19,6 +19,13 @@ export const handler = async (event) => {
             const items = await collection().find({}).toArray();
             return sendJson(200, items);
         }
+
+        if(method === "QUERY"){
+            const id = event.queryStringParameters?.id;
+            if (!id) return sendJson(400, {error: "Missing ID query parameter. This endpoint currently only supports QUERY by ID."});
+            const item = await collection().find({studyID: id}).toArray();
+            return sendJson(200, item);
+        }
         
         if(method === "POST"){
             const body = event.body ? JSON.parse(event.body) : {};

@@ -1,5 +1,6 @@
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
+import { RegExpMatcher, englishDataset, englishRecommendedTransformers } from 'obscenity';
 
 import "./PreSurveyPage.css"
 function PreSurveyPage( { studyState }) {
@@ -14,21 +15,36 @@ function PreSurveyPage( { studyState }) {
     const on_button_click = async () => {
         if (!prolificID || !username) {
             setErrorMessage("Missing Prolific ID or username. Please input these values before continuing.");
+            return;
         }
-        else if (!consented) {
+
+        if (!consented) {
             setErrorMessage("Please read through the provided consent document and check the box before continuing.");
+            return;
         }
-        else {
-            setErrorMessage(null);
-            const ok = await save();
-            if (ok) {
-                navigate("/1", { replace: true, state : {username, prolificID } });
-            }
+
+        if (await usernameTaken() === true) {
+            setErrorMessage("Username already taken. Please choose a different one.");
+            return;
         }
+
+        if (usernameProfane(username) === true) {
+            setErrorMessage("Username contains profanity. Please choose a username that doesn't contain profanity.");
+            return;
+        }
+
+
+        setErrorMessage(null);
+        const ok = await save();
+        if (ok) {
+            navigate("/1", { replace: true, state : {username, uID: ok } });
+        }
+
     }
 
     const save = async () => {
         setButtonText("Loading...");
+        let studyID = studyState.id;
         try {
             const res = await fetch("/.netlify/functions/pre_survey", {
                 method: "POST",
@@ -38,6 +54,7 @@ function PreSurveyPage( { studyState }) {
                 body: JSON.stringify({
                     prolificID,
                     username,
+                    studyID,
                     timestamp: new Date().toISOString(),
                 }),
             });
@@ -45,7 +62,8 @@ function PreSurveyPage( { studyState }) {
             if (!res.ok) {
                 throw new Error(`Server responded with ${res.status}`);
             }
-            return true;
+            const id = await res.json();
+            return id.insertedId;
         } catch (err) {
             console.error(err);
             setErrorMessage("Something went wrong saving your information. Please try again.");
@@ -54,6 +72,40 @@ function PreSurveyPage( { studyState }) {
             setButtonText("Continue");
         }
     };
+
+    const usernameTaken = async () => {
+        let studyID = studyState.id;
+        try {
+            const res = await fetch(`/.netlify/functions/pre_survey?id=${studyID}`, {
+                method: "QUERY",
+            });
+            if (!res.ok) {
+                throw new Error("Something went wrong saving your information. Please try again.");
+            }
+            const data = await res.json();
+            console.log(data);
+            console.log(username);
+            for(let i = 0; i < data.length; i+= 1) {
+                console.log(data[i].username);
+                if (data[i].username === username) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        catch (err) {
+            console.error(err);
+            setErrorMessage("Something went wrong saving your information. Please try again.");
+            return true;
+        }
+    }
+
+    const matcher = new RegExpMatcher({
+        ...englishDataset.build(),
+        ...englishRecommendedTransformers,
+        });
+
+    const usernameProfane = (username) => matcher.hasMatch(username);
 
 
     return (

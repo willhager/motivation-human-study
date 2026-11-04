@@ -8,7 +8,7 @@ function PostSurveyOpen2({studyState}) {
 
     const navigate = useNavigate();
     const state = useLocation();
-    const {username, prolificID, insertedID} = state.state;
+    const {username, uID, insertedID} = state.state;
     const on_button_clicked = async () => {
         if (suspicion == null || suspicion == "") {
             setErrorMessage("You must respond to the question to continue");
@@ -16,7 +16,7 @@ function PostSurveyOpen2({studyState}) {
         }
         const id = await save()
         if (id){
-                navigate("/10", {replace: true, state: {username, prolificID, insertedID: id}});
+                navigate("/10", {replace: true, state: {username, uID, insertedID: id}});
         }
 
     }
