@@ -1,5 +1,5 @@
 .page{
-  margin-top: 5rem;
+  margin-top: 0.5rem;
   width: 70%;
   margin-left: auto;
   margin-right: auto;
@@ -42,6 +42,7 @@
   align-items: center;
   justify-content: left;
   align-self: center;
+  gap: 15px;
 }
 
 .next-button{

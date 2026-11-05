@@ -19,12 +19,16 @@ function Primes({ studyState }) {
     const on_button_clicked = async () => {
         if (!response1 || (!response2 && studyState.condition == "directional")) {
             setErrorMessage("Please ensure you've responded to all questions on the page.")
+            return;
         }
-        else {
-            const id = await save();
-            if (id){
-                navigate("/2", {replace: true, state: {username, uID, insertedID: id}});
-            }
+        if (response1.length < 50 || (studyState.condition == "directional" && response2.length < 50)) {
+            setErrorMessage("Please ensure you've responded thoughtfully to each question (minimum 50 characters).");
+            return;
+        }
+
+        const id = await save();
+        if (id){
+            navigate("/2", {replace: true, state: {username, uID, insertedID: id}});
         }
     }
 
