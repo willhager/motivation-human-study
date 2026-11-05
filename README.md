@@ -1,7 +1,8 @@
 1. Create a file .env and include value MONGO_URI
 2. npm install
 3. npm install -g netlify-cli
-4. netlify dev
+4. nvm use v24.15.0
+5. netlify dev
 
 The state of the study is configured in the MongoDB collection "state". There's a single document in that collection. Editing different values has different effects on the study.
 State keys:
