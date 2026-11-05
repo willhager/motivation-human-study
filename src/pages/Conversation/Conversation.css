@@ -46,7 +46,22 @@
   background-color: white;
   padding: 30px;
   box-sizing: border-box;
-  max-height: 90vm;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.conversation {
+    width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.conversation-row-centered textarea {
+    width: 80%;
+    margin-top: 10px;
 }
 
 .conversation-row-centered {
@@ -81,6 +96,7 @@
     align-items: center;
     justify-content: center;
 }
+
 
 .time-remaining-box{
     margin: 10px;

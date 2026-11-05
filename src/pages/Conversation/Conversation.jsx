@@ -82,7 +82,6 @@ function Conversation( { studyState } ) {
         typingStartRef.current = null;
         secondsTypingRef.current.push(elapsed);
         setUserResponse("");
-        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
         await updateConversation(response);
         await fetchConversation();
     }
@@ -118,6 +117,10 @@ function Conversation( { studyState } ) {
     }, [deadline]);
 
     useEffect(() => {
+        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [conversation.length]);
+
+    useEffect(() => {
         if (secondsLeft <= 0) {
             localStorage.removeItem(`deadline-${uID}`);
             navigate("/7", { replace: true, state: { username, uID, secondsTyping : secondsTypingRef.current} });
@@ -133,8 +136,9 @@ function Conversation( { studyState } ) {
                 </div>
             </div>
             <div className="box">
-                <div className="box-internal conversation">
-                    {conversation.map((item, index) => {
+                <div className="conversation-box-internal">
+                    <div className="conversation">
+                        {conversation.map((item, index) => {
                         let isSelf = "";
                         if (item.uID === uID) {
                             isSelf = "self";
@@ -156,12 +160,13 @@ function Conversation( { studyState } ) {
                                 <p>{item.response}</p>
                             </div>
                         )
-                    })}
+                        })}
+                        <div ref={bottomRef} />
+                    </div>
                     <div className="conversation-row-centered">
                         <textarea id="user-input" value={userResponse} onChange={e => updateUserResponse(e.target.value)} onKeyDown={handleKeyDown}/>
                         <button className="conversation-next-button" onClick={() => send_update(userResponse)}>Send</button>
                     </div>
-                    <div ref={bottomRef} />
                 </div>
             </div>
         </div>

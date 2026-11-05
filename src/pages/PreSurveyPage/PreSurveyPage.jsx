@@ -28,11 +28,15 @@ function PreSurveyPage( { studyState }) {
             return;
         }
 
+        if (await prolificIDTaken() === true) {
+            setErrorMessage("Your prolific ID has been marked as already in the study. Please double check that you've typed it in correctly.");
+            return;
+        }
+
         if (usernameProfane(username) === true) {
             setErrorMessage("Username contains profanity. Please choose a username that doesn't contain profanity.");
             return;
         }
-
 
         setErrorMessage(null);
         const ok = await save();
@@ -83,11 +87,34 @@ function PreSurveyPage( { studyState }) {
                 throw new Error("Something went wrong saving your information. Please try again.");
             }
             const data = await res.json();
-            console.log(data);
-            console.log(username);
             for(let i = 0; i < data.length; i+= 1) {
                 console.log(data[i].username);
                 if (data[i].username === username) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        catch (err) {
+            console.error(err);
+            setErrorMessage("Something went wrong saving your information. Please try again.");
+            return true;
+        }
+    }
+
+    const prolificIDTaken = async () => {
+        let studyID = studyState.id;
+        try {
+            const res = await fetch(`/.netlify/functions/pre_survey?id=${studyID}`, {
+                method: "QUERY",
+            });
+            if (!res.ok) {
+                throw new Error("Something went wrong saving your information. Please try again.");
+            }
+            const data = await res.json();
+            for(let i = 0; i < data.length; i+= 1) {
+                console.log(data[i].prolificID);
+                if (data[i].prolificID === prolificID) {
                     return true;
                 }
             }
