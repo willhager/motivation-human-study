@@ -47,7 +47,7 @@ function PolicyMessaging({studyState}) {
         }
         const timer = setTimeout(() => {
             hadTime()
-            navigate("/5", { replace: true, state: { username, uID, insertedID } });
+            navigate("/conversationbrief", { replace: true, state: { username, uID, insertedID } });
         }, 2 * 6 * 1000);
 
         return () => clearTimeout(timer);
@@ -57,6 +57,7 @@ function PolicyMessaging({studyState}) {
     return (
         <div className="page">
             <div className="box">
+                <h1>University Considered AI Policy</h1>
                 <div className="box-internal">
                     <p>With the rapid pace of advancement in the artificial intelligence (AI) field, your state university system is currently considering whether or not to create policy and regulation around the use of AI in the classroom. Given this policy will take effect at the university level, they are interested in learning about the student population’s stance on AI use in the classroom. More importantly, the University has partnered with the Computer Science department to administer surveys and discussions about the proposed policy and its persuasiveness.</p>
                 </div>

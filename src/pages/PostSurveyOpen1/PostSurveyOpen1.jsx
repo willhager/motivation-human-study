@@ -16,7 +16,7 @@ function PostSurveyOpen1({studyState}) {
         }
         const id = await save()
         if (id){
-                navigate("/9", {replace: true, state: {username, uID, insertedID: id}});
+                navigate("/debrief2", {replace: true, state: {username, uID, insertedID: id}});
         }
 
     }
@@ -51,6 +51,7 @@ function PostSurveyOpen1({studyState}) {
     return (
         <div className="page">
             <div className="box">
+                <h1>Debriefing (1/3)</h1>
                 <div className="box-internal">
                     <p>First, please let us know if there are any comments you have about the study or anything you would like to tell us about that you think might have affected your responses to the survey.</p>
                     <textarea rows={4} maxLength={1500} required onChange={e => setComments(e.target.value)}></textarea>

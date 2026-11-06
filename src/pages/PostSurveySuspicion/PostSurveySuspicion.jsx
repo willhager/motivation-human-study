@@ -18,7 +18,7 @@ function PostSurveyBelievability() {
         else {
             const ok = await save();
             if (ok){
-                navigate("/11", {replace: true, state: {username, uID}});
+                navigate("/exit", {replace: true, state: {username, uID}});
             }
         }
     }
@@ -53,6 +53,7 @@ function PostSurveyBelievability() {
     return (
         <div className="page">
             <div className="box">
+                <h1>Debriefing (3/3)</h1>
                 <div className="box-internal">
                     <p>On a scale from 1-7, where 1 = “Not believable at all” and 7 = “Extremely believable”, how believable did you find the university’s proposal?</p>
                     <div className="row-centered">

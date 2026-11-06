@@ -32,7 +32,7 @@ function Primes({ studyState }) {
 
         const id = await save();
         if (id){
-            navigate("/2", {replace: true, state: {username, uID, insertedID: id}});
+            navigate("/importance", {replace: true, state: {username, uID, insertedID: id}});
         }
     }
 
@@ -102,6 +102,7 @@ function Primes({ studyState }) {
     return (
         <div className = "page">
             <div className = "box">
+                <h1>Written Opinions on AI in Higher Education</h1>
                 <div className="box-internal">
                     <p>{prime}</p>
                     {box1}

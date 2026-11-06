@@ -16,7 +16,7 @@ function PostSurveyOpen2({studyState}) {
         }
         const id = await save()
         if (id){
-                navigate("/10", {replace: true, state: {username, uID, insertedID: id}});
+                navigate("/debrief3", {replace: true, state: {username, uID, insertedID: id}});
         }
 
     }
@@ -51,6 +51,7 @@ function PostSurveyOpen2({studyState}) {
     return (
         <div className="page">
             <div className="box">
+                <h1>Debriefing (2/3)</h1>
                 <div className="box-internal">
                     <p>Next, did you find anything unusual about the university’s proposed AI policy when you first read about it?</p>
                     <textarea rows={4} maxLength={1500} required onChange={e => setSuspicion(e.target.value)}></textarea>

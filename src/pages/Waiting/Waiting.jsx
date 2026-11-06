@@ -64,7 +64,7 @@ function Waiting({studyState}) {
                     setText(`Congratulations, you will be automatically redirected to the next part of the study in 10 seconds. There will be ${data.arrived} people in the conversation, including you.`);
                     pushAutoSection();
                     redirectTimer = setTimeout(() => {
-                        navigate("/4", { replace: true, state: { username, uID, insertedID } });
+                        navigate("/policy", { replace: true, state: { username, uID, insertedID } });
                     }, 10000);
                 }
             } catch (err) {

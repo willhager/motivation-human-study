@@ -12,8 +12,13 @@ function PreSurveyPage( { studyState }) {
 
     const navigate = useNavigate();
 
+
     if (studyState.inConversation) {
         navigate("/inConversation");
+    }
+
+        if (studyState.inDemographic) {
+        navigate("/inDemographic");
     }
     
     const on_button_click = async () => {
@@ -45,7 +50,7 @@ function PreSurveyPage( { studyState }) {
         setErrorMessage(null);
         const ok = await save();
         if (ok) {
-            navigate("/1", { replace: true, state : {username, uID: ok } });
+            navigate("/reflection", { replace: true, state : {username, uID: ok } });
         }
 
     }
