@@ -1,10 +1,12 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect , useState, useRef} from "react";
 
 function ConversationalSetup({studyState}) {
+    const [enoughSetupTime, setEnoughSetupTime] = useState(false)
+    const enoughSetupTimeRef = useRef();
     const navigate = useNavigate();
     const state = useLocation();
-    const {username, uID} = state.state;
+    const {username, uID, insertedID} = state.state;
     const condition = studyState.condition;
 
     let conditionText = ""
@@ -18,8 +20,34 @@ function ConversationalSetup({studyState}) {
     }
 
     useEffect(() => {
+        enoughSetupTimeRef.current = enoughSetupTime;
+    }, [enoughSetupTime]);
+
+    useEffect(() => {
+        const hadTime = async () => {
+            console.log(enoughSetupTime);
+            try {
+                const res = await fetch(`/.netlify/functions/primes?id=${insertedID}`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        enoughSetupTime: enoughSetupTimeRef.current,
+                        timestamp: new Date().toISOString(),
+                    }),
+                });
+
+                if (!res.ok) {
+                    throw new Error(`Server responded with ${res.status}`);
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
         const timer = setTimeout(() => {
-        navigate("/6", { replace: true, state: { username, uID } });
+            hadTime()
+            navigate("/6", { replace: true, state: { username, uID } });
         }, 2 * 6 * 1000);
 
         return () => clearTimeout(timer);
@@ -35,6 +63,10 @@ function ConversationalSetup({studyState}) {
                 <div className="box-internal">
                     <p>{conditionText}</p>
                     <p>This page will automatically redirect you to the next part of the study.</p>
+                    <div className="row-centered">
+                        <p>Check this if you had enough time to read all of the text on this page. Note that this has no effect on your reward and is merely used to help calibrate future iterations of the study.</p>
+                        <input className="input-short" type="checkbox" checked={enoughSetupTime} onChange={e => setEnoughSetupTime(e.target.checked)}></input>
+                    </div>
                 </div>
             </div>
         </div>

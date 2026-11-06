@@ -10,6 +10,10 @@ function Primes({ studyState }) {
 
     const navigate = useNavigate();
 
+    if (studyState.inConversation) {
+        navigate("/inConversation");
+    }
+
     if (!state.state?.username || !state.state?.uID) {
         return <Navigate to="/" replace />;
     }

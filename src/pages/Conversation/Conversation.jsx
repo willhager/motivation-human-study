@@ -14,6 +14,9 @@ function Conversation( { studyState } ) {
     const typingStartRef = useRef(null);
     const secondsTypingRef = useRef([]);
 
+    const readingStartRef = useRef(null);
+    const secondsReadingRef = useRef([]);
+
     const TOTAL_SECONDS = 600;
 
     const [deadline] = useState(() => {
@@ -34,6 +37,7 @@ function Conversation( { studyState } ) {
     const minutes = Math.floor(secondsLeft / 60);
     const seconds = secondsLeft % 60;
 
+    //db pull
     const fetchConversation = async () => {
         try {
             const res = await fetch(`/.netlify/functions/conversations?id=${id}`, {
@@ -52,6 +56,7 @@ function Conversation( { studyState } ) {
         }
     }
 
+    //db push
     const updateConversation = async (response) => {
         try {
             const res = await fetch(`/.netlify/functions/conversations?id=${id}`, {
@@ -74,6 +79,7 @@ function Conversation( { studyState } ) {
         }
     }
 
+    // when send button is pressed
     const send_update = async (response) => {
         if (response.trim() === "" || response === null) {
             return;
@@ -93,19 +99,28 @@ function Conversation( { studyState } ) {
         }
     }
 
+    // updates variable for user response and tracks typing time
     const updateUserResponse = (content)  => {
+        if (readingStartRef.current !== null) {
+            const elapsed = readingStartRef.current ? (Date.now() - readingStartRef.current) / 1000 : 0;
+            readingStartRef.current = null;
+            secondsReadingRef.current.push(elapsed);
+            console.log(secondsReadingRef);
+        }
         if (typingStartRef.current === null){
             typingStartRef.current = Date.now();
         }
         setUserResponse(content);
     }
 
+    //3 second refresh to pull from db
     useEffect(() => {
-            fetchConversation();
-            const intervalId = setInterval(fetchConversation, 3000);
-            return () => clearInterval(intervalId);
+        fetchConversation();
+        const intervalId = setInterval(fetchConversation, 3000);
+        return () => clearInterval(intervalId);
       }, []);
 
+    //1 second refresh to update time remaining
     useEffect(() => {
         const tick = () => {
             const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
@@ -116,14 +131,22 @@ function Conversation( { studyState } ) {
         return () => clearInterval(intervalId);
     }, [deadline]);
 
+    //scroll to bottom when convo length changes
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [conversation.length]);
 
     useEffect(() => {
+        if (conversation.length > 0 && conversation[conversation.length - 1].uID !== uID && typingStartRef.current === null && readingStartRef.current === null) {
+            readingStartRef.current = Date.now();
+        }
+    }, [conversation.length])
+
+    //on end of conversation, navigate
+    useEffect(() => {
         if (secondsLeft <= 0) {
             localStorage.removeItem(`deadline-${uID}`);
-            navigate("/7", { replace: true, state: { username, uID, secondsTyping : secondsTypingRef.current} });
+            navigate("/7", { replace: true, state: { username, uID, secondsTyping : secondsTypingRef.current, secondsReading: secondsReadingRef.current} });
         }
     }, [secondsLeft, navigate, username, uID]);
 
