@@ -14,6 +14,11 @@ function AIOpinionImportance({ studyState }) {
     const state = useLocation();
     const {username, uID, insertedID} = state.state;
 
+    if (studyState.inConversation) {
+        navigate("/inConversation");
+    }
+
+
     const on_button_clicked = async () => {
         if (!opinionStrength) {
             setErrorMessage("Please ensure you've responded to all questions on the page.")
@@ -21,7 +26,7 @@ function AIOpinionImportance({ studyState }) {
         else {
             const ok = await save();
             if (ok){
-                navigate("/3", {replace: true, state: {username, uID}});
+                navigate("/3", {replace: true, state: {username, uID, insertedID}});
             }
         }
     }

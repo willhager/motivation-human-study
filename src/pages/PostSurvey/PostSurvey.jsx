@@ -55,6 +55,7 @@ function PostSurvey({ studyState }) {
                     partnerCredibility,
                     attentionCheck,
                     secondsTyping,
+                    secondsReading,
                     timestamp: new Date().toISOString(),
                 }),
             });

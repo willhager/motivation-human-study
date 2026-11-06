@@ -32,29 +32,42 @@ export const handler = async (event) => {
         return sendJson(400, { error: "Invalid JSON." });
       }
 
-      const { prolificID } = body;
-      if (typeof prolificID !== "string" || !prolificID.trim()) {
-        return sendJson(400, { error: "prolificID is required." });
+      if (body.action === "uid") {
+        const { uID } = body;
+        if (typeof uID !== "string" || !uID.trim()) {
+          return sendJson(400, { error: "uID is required." });
+        }
+
+        const updated = await collection.findOneAndUpdate(
+          { _id: STATE_ID },
+          [
+            { $set: { arrivedIDs: { $setUnion: [{ $ifNull: ["$arrivedIDs", []] }, [uID]] } } },
+            { $set: { arrived: { $size: "$arrivedIDs" } } },
+          ],
+          { returnDocument: "after" }
+        );
+        const doc = updated?.value ?? updated;
+        if (!doc) return sendJson(404, { error: "State object not found." });
+        return sendJson(200, publicState(doc));
       }
 
-      const updated = await collection.findOneAndUpdate(
-        { _id: STATE_ID },
-        [
-          {
-            $set: {
-              arrivedIDs: {
-                $setUnion: [{ $ifNull: ["$arrivedIDs", []] }, [prolificID]],
-              },
-            },
-          },
-          { $set: { arrived: { $size: "$arrivedIDs" } } },
-        ],
-        { returnDocument: "after" }
-      );
+      if (body.action === "inConversation") {
+        const { inConversation } = body;
+        if (typeof inConversation !== "boolean") {
+          return sendJson(400, { error: "inConversation (boolean) is required." });
+        }
 
-      const doc = updated?.value ?? updated;
-      if (!doc) return sendJson(404, { error: "State object not found." });
-      return sendJson(200, publicState(doc));
+        const updated = await collection.findOneAndUpdate(
+          { _id: STATE_ID },
+          { $set: { inConversation } },
+          { returnDocument: "after" }
+        );
+        const doc = updated?.value ?? updated;
+        if (!doc) return sendJson(404, { error: "State object not found." });
+        return sendJson(200, publicState(doc));
+      }
+
+      return sendJson(400, { error: "Unknown action." });
     }
 
     return sendJson(405, { error: `Method ${method} not allowed.` });

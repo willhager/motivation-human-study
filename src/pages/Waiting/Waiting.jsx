@@ -4,24 +4,52 @@ import {useLocation, useNavigate} from "react-router-dom";
 
 function Waiting({studyState}) {
     const state = useLocation();
-    const {username, uID} = state.state;
-    const [localState, setLocalState] = useState(studyState);
+    const {username, uID, insertedID} = state.state;
     const [text, setText] = useState("Thank you for your participation so far. Please wait and the study will continue shortly.");
     const navigate = useNavigate();
 
       useEffect(() => {
             if (!uID) return;
-            fetch("/.netlify/functions/state", {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ uID }),
-            }).catch(console.log);
+            async function pushUID() {
+                try {
+                    const res = await fetch("/.netlify/functions/state", {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ action: "uid", uID }),
+                    });
+                    if (!res.ok) {
+                        throw new Error(`Request failed: ${res.status}`);
+                    }
+                }
+                catch (err) {
+                    console.log(err);
+                }
+            }
+            pushUID();
+
         }, [uID]);
 
 
     useEffect(() => {
         let intervalId;
         let redirectTimer;
+
+        async function pushAutoSection() {
+            try{
+                const res = await fetch("/.netlify/functions/state", {
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ action: "inConversation", inConversation: true }),
+                });
+                if (!res.ok) {
+                    throw new Error(`Request failed: ${res.status}`);
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+
+        }
 
         async function checkState() {
             try {
@@ -30,14 +58,14 @@ function Waiting({studyState}) {
                     throw new Error(`Request failed: ${res.status}`);
                 }
                 const data = await res.json();
-                setLocalState(data);
 
                 if (data.arrived >= data.participants) {
                     clearInterval(intervalId); // stop polling
-                    setText(`Congratulations, you will be automatically redirected to the next part of the study in 20 seconds. There will be ${data.arrived} people in the conversation, including you.`);
+                    setText(`Congratulations, you will be automatically redirected to the next part of the study in 10 seconds. There will be ${data.arrived} people in the conversation, including you.`);
+                    pushAutoSection();
                     redirectTimer = setTimeout(() => {
-                        navigate("/4", { replace: true, state: { username, uID } });
-                    }, 20000);
+                        navigate("/4", { replace: true, state: { username, uID, insertedID } });
+                    }, 10000);
                 }
             } catch (err) {
                 console.log(err);

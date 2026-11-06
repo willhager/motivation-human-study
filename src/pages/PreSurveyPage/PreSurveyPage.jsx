@@ -11,6 +11,10 @@ function PreSurveyPage( { studyState }) {
     const [buttonText, setButtonText] = useState("Continue")
 
     const navigate = useNavigate();
+
+    if (studyState.inConversation) {
+        navigate("/inConversation");
+    }
     
     const on_button_click = async () => {
         if (!prolificID || !username) {
@@ -88,7 +92,6 @@ function PreSurveyPage( { studyState }) {
             }
             const data = await res.json();
             for(let i = 0; i < data.length; i+= 1) {
-                console.log(data[i].username);
                 if (data[i].username === username) {
                     return true;
                 }
@@ -113,7 +116,6 @@ function PreSurveyPage( { studyState }) {
             }
             const data = await res.json();
             for(let i = 0; i < data.length; i+= 1) {
-                console.log(data[i].prolificID);
                 if (data[i].prolificID === prolificID) {
                     return true;
                 }

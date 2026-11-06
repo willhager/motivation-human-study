@@ -1,10 +1,13 @@
-import {useLocation, useNavigate} from "react-router-dom";
-import { useEffect } from "react";
+import {useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef} from "react";
 
 function PolicyMessaging({studyState}) {
+    const [enoughPolicyTime, setEnoughPolicyTime] = useState(false);
+    const enoughPolicyTimeRef = useRef(enoughPolicyTime);
+
     const navigate = useNavigate();
     const state = useLocation();
-    const {username, uID} = state.state;
+    const {username, uID, insertedID} = state.state;
     const policy = studyState.policy;
 
     let policyText = ""
@@ -18,8 +21,33 @@ function PolicyMessaging({studyState}) {
     }
 
     useEffect(() => {
+        enoughPolicyTimeRef.current = enoughPolicyTime;
+    }, [enoughPolicyTime]);
+
+    useEffect(() => {
+        const hadTime = async () => {
+            try {
+                const res = await fetch(`/.netlify/functions/primes?id=${insertedID}`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        enoughPolicyTime: enoughPolicyTimeRef.current,
+                        timestamp: new Date().toISOString(),
+                    }),
+                });
+
+                if (!res.ok) {
+                    throw new Error(`Server responded with ${res.status}`);
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
         const timer = setTimeout(() => {
-        navigate("/5", { replace: true, state: { username, uID } });
+            hadTime()
+            navigate("/5", { replace: true, state: { username, uID, insertedID } });
         }, 2 * 6 * 1000);
 
         return () => clearTimeout(timer);
@@ -36,6 +64,10 @@ function PolicyMessaging({studyState}) {
                     <h3 className="no-bottom-margin">Policy:</h3>
                     <p>{policyText}</p>
                     <p>This page will automatically redirect you to the next part of the study.</p>
+                    <div className="row-centered">
+                        <p>Check this if you had enough time to read all of the text on this page. Note that this has no effect on your reward and is merely used to help calibrate future iterations of the study.</p>
+                        <input className="input-short" type="checkbox" checked={enoughPolicyTime} onChange={e => setEnoughPolicyTime(e.target.checked)}></input>
+                    </div>
                 </div>
             </div>
         </div>
