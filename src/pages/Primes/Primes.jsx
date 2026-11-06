@@ -1,11 +1,13 @@
 import {useLocation, useNavigate, Navigate} from "react-router-dom";
 import {useState} from 'react';
 
+import "./Primes.css"
+
 function Primes({ studyState }) {
     const state = useLocation();
     const [errorMessage, setErrorMessage] = useState("");
-    const [response1, setResponse1] = useState(null);
-    const [response2, setResponse2] = useState(null);
+    const [response1, setResponse1] = useState("");
+    const [response2, setResponse2] = useState("");
     const [buttonText, setButtonText] = useState("Continue")
 
     const navigate = useNavigate();
@@ -88,13 +90,13 @@ function Primes({ studyState }) {
     let box2 = null;
     switch (studyState.condition){
         case "accuracy":
-            prime = "Artificial intelligence (AI) as a tool for higher education has received a lot of news attention, both for its advancements and its pitfalls. For this conversation, we want you to try to be as evenhanded about the issue as possible and carefully consider all of the reasons you might feel positively or negatively about AI use in universities. We are interested in understanding your opinions about both why people might support or why they might oppose this tool in order to get the most accurate student impressions we can. Please take a minute to reflect and write your thoughts below, making sure to also explain how you arrived at them.";
+            prime = "Artificial intelligence (AI) as a tool for higher education has received a lot of news attention, both for its advancements and its pitfalls. For this conversation, we want you to try to be as evenhanded about the issue as possible and carefully consider all of the reasons you might feel positively or negatively about AI use in universities. We are interested in understanding your opinions about both why people might support or why they might oppose this tool in order to get the most accurate student impressions we can. Please take a minute to reflect and write your thoughts below, making sure to also explain how you arrived at them. (Minimum 50 characters)";
             box1 = <textarea rows={4} maxLength={1500} required onChange={e => setResponse1(e.target.value)}></textarea>
             break;
         case "directional":
-            prime = "The rise of artificial intelligence (AI), particularly its use in education and universities, is a very polarized issue, with some individuals supporting its use and others opposing it. Think about whether you mostly support or oppose the use of AI in universities. We are interested in understanding more about your position on the issue and encourage you to defend it in your conversation. Please take a minute to reflect on your preference and why you choose to prefer that stance over the other. Please state your preference and write your beliefs about it below.";
+            prime = "The rise of artificial intelligence (AI), particularly its use in education and universities, is a very polarized issue, with some individuals supporting its use and others opposing it. Think about whether you mostly support or oppose the use of AI in universities. We are interested in understanding more about your position on the issue and encourage you to defend it in your conversation. Please take a minute to reflect on your preference and why you choose to prefer that stance over the other. Please state your preference and write your beliefs about it below. (Minimum 50 characters)";
             box1 = <textarea rows={4} maxLength={1500} required onChange={e => setResponse1(e.target.value)}></textarea>
-            prime2 = "Now, please consider your biggest criticism of the other perspective. Why do you disagree with it? Please write those things below."
+            prime2 = "Now, please consider your biggest criticism of the other perspective. Why do you disagree with it? Please write those things below. (Minimum 50 characters)"
             box2 = <textarea rows={4} maxLength={1500} required onChange={e => setResponse2(e.target.value)}></textarea>
             break;
     }
@@ -104,12 +106,14 @@ function Primes({ studyState }) {
             <div className = "box">
                 <div className="box-internal">
                     <p>{prime}</p>
+                    <p className="p-small-no-margin">{response1.length}/50 chars</p>
                     {box1}
                     {!box2 && <button className="next-button" onClick={on_button_clicked}>{buttonText}</button> }
                 </div>
                 {box2 && 
                     <div className="box-internal">
                         <p>{prime2}</p>
+                        <p className="p-small-no-margin">{response2.length}/50 chars</p>
                         {box2}
                         <button className="next-button" onClick={on_button_clicked}>{buttonText}</button>
                     </div>

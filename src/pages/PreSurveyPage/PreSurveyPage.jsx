@@ -159,7 +159,7 @@ function PreSurveyPage( { studyState }) {
 
                 <div className="box-internal">
                     <h2>Consent document:</h2>
-                    <object className="consent-embedding" data={"src/assets/4_Scott_Teaching.pdf"} type="application/pdf">
+                    <object className="consent-embedding" data={"/4_Scott_Teaching.pdf"} type="application/pdf">
                         <p>
                             Your browser can't display PDFs. <a href={"src/assets/4_Scott_Teaching.pdf"}>Download it instead</a>.
                         </p>
