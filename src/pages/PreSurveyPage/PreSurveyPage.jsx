@@ -85,7 +85,7 @@ function PreSurveyPage( { studyState }) {
         let studyID = studyState.id;
         try {
             const res = await fetch(`/.netlify/functions/pre_survey?id=${studyID}`, {
-                method: "QUERY",
+                method: "GET",
             });
             if (!res.ok) {
                 throw new Error("Something went wrong saving your information. Please try again.");
@@ -109,7 +109,7 @@ function PreSurveyPage( { studyState }) {
         let studyID = studyState.id;
         try {
             const res = await fetch(`/.netlify/functions/pre_survey?id=${studyID}`, {
-                method: "QUERY",
+                method: "GET",
             });
             if (!res.ok) {
                 throw new Error("Something went wrong saving your information. Please try again.");

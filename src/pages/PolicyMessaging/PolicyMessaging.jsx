@@ -48,7 +48,7 @@ function PolicyMessaging({studyState}) {
         const timer = setTimeout(() => {
             hadTime()
             navigate("/5", { replace: true, state: { username, uID, insertedID } });
-        }, 2 * 6 * 1000);
+        }, 2 * 60 * 1000); // num minutes * len of minute
 
         return () => clearTimeout(timer);
     }, [navigate, username, uID]);

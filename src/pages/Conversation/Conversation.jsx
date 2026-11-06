@@ -41,7 +41,7 @@ function Conversation( { studyState } ) {
     const fetchConversation = async () => {
         try {
             const res = await fetch(`/.netlify/functions/conversations?id=${id}`, {
-                method: "QUERY",
+                method: "GET",
             });
             if (!res.ok) {
                 throw new Error(`Request failed: ${res.status}`);
