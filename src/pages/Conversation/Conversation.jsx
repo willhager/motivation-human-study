@@ -1,6 +1,8 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import {useState, useEffect, useRef} from 'react';
 
+import InstructionPopup from "./InstructionPopup";
+
 import "./Conversation.css";
 
 function Conversation( { studyState } ) {
@@ -10,6 +12,8 @@ function Conversation( { studyState } ) {
     const {username, uID} = state.state;
     const [conversation, setConversation] = useState([]);
     const [userResponse, setUserResponse] = useState("");
+
+    const [instructionPopup, setInstructionPopup] = useState(false);
 
     const typingStartRef = useRef(null);
     const secondsTypingRef = useRef([]);
@@ -197,6 +201,8 @@ function Conversation( { studyState } ) {
                         <button className="conversation-next-button" onClick={() => send_update(userResponse)}>Send</button>
                     </div>
                 </div>
+                <button className="next-button" onClick={() => setInstructionPopup(true)}>View Instructions</button>
+                {instructionPopup && <InstructionPopup studyState = {studyState} onClose={() => setInstructionPopup(false)}></InstructionPopup>}
             </div>
         </div>
     )
