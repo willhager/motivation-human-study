@@ -146,9 +146,14 @@ function Conversation( { studyState } ) {
     useEffect(() => {
         if (secondsLeft <= 0) {
             localStorage.removeItem(`deadline-${uID}`);
-            navigate("/7", { replace: true, state: { username, uID, secondsTyping : secondsTypingRef.current, secondsReading: secondsReadingRef.current} });
+            // navigate("/7", { replace: true, state: { username, uID, secondsTyping : secondsTypingRef.current, secondsReading: secondsReadingRef.current} });
         }
     }, [secondsLeft, navigate, username, uID]);
+
+
+    let next = 0
+    let colorByUser = {uID: "green"};
+    const colors = ["orange", "yellow", "blue", "red", "purple", "brown"];
 
 
     return (
@@ -162,13 +167,14 @@ function Conversation( { studyState } ) {
                 <div className="conversation-box-internal">
                     <div className="conversation">
                         {conversation.map((item, index) => {
-                        let isSelf = "";
-                        if (item.uID === uID) {
-                            isSelf = "self";
+                        let color = "";
+                        if (item.uID !== uID && !(item.uID in colorByUser)) {
+                            colorByUser[item.uID] = colors[next % colors.length];
+                            next++;
                         }
-
+                        color = item.uID === uID ? "green" : colorByUser[item.uID];
                         return (
-                            <div className={`conversation-item ${isSelf}`} key={index}>
+                            <div className={`conversation-item ${color}`} key={index}>
                                 <div className="conversation-item-header-row">
                                     <h4>{item.username}</h4>
                                     <h4>{new Date(item.timestamp).toLocaleString("en-US", {
