@@ -5,7 +5,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 function Waiting({studyState}) {
     const state = useLocation();
     const {username, uID, insertedID} = state.state;
-    const [text, setText] = useState("Thank you for your participation so far. Please wait and the study will continue shortly.");
+    const [text, setText] = useState("Thank you for your participation so far. Please wait and the study will continue shortly. This process may take up to 5 minutes before moving on.");
     const navigate = useNavigate();
 
       useEffect(() => {

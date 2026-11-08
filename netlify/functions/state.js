@@ -9,8 +9,6 @@ const sendJson = (statusCode, body) => ({
 
 const STATE_ID = new ObjectId("6ad678f761b961446f4150af");
 
-const publicState = ({ arrivedIDs, ...rest }) => rest;
-
 export const handler = async (event) => {
   const method = event.httpMethod;
 
@@ -21,7 +19,7 @@ export const handler = async (event) => {
     if (method === "GET") {
       const state = await collection.findOne({ _id: STATE_ID });
       if (!state) return sendJson(404, { error: "State object not found." });
-      return sendJson(200, publicState(state));
+      return sendJson(200, state);
     }
 
     if (method === "PATCH") {
