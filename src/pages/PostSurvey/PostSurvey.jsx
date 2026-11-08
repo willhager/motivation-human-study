@@ -15,7 +15,7 @@ function PostSurvey({ studyState }) {
 
     const navigate = useNavigate();
     const state = useLocation();
-    const {username, uID, secondsTyping} = state.state;
+    const {username, uID, secondsTyping, secondsReading} = state.state;
 
     const likerts_support = ["Strongly Oppose", "Moderately Oppose", "Slightly Oppose", "Neither Oppose nor Support", "Slightly Support", "Moderately Support", "Strongly Support"];
     const likerts_opinion = ["Strongly Disagree", "Moderately Disagree", "Slightly Disagree", "Neither Agree nor Disagree", "Slightly Agree", "Moderately Agree", "Strongly Agree"];

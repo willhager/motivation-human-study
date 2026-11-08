@@ -26,28 +26,34 @@ function PreSurveyPage( { studyState }) {
     }, [studyState.inDemographic]);
     
     const on_button_click = async () => {
+        setButtonText("Loading...");
         if (!prolificID || !username) {
             setErrorMessage("Missing Prolific ID or username. Please input these values before continuing.");
+            setButtonText("Continue");
             return;
         }
 
         if (!consented) {
             setErrorMessage("Please read through the provided consent document and check the box before continuing.");
+            setButtonText("Continue");
             return;
         }
 
         if (await usernameTaken() === true) {
             setErrorMessage("Username already taken. Please choose a different one.");
+            setButtonText("Continue");
             return;
         }
 
         if (await prolificIDTaken() === true) {
             setErrorMessage("Your prolific ID has been marked as already in the study. Please double check that you've typed it in correctly.");
+            setButtonText("Continue");
             return;
         }
 
         if (usernameProfane(username) === true) {
             setErrorMessage("Username contains profanity. Please choose a username that doesn't contain profanity.");
+            setButtonText("Continue");
             return;
         }
 
@@ -94,7 +100,7 @@ function PreSurveyPage( { studyState }) {
         let studyID = studyState.id;
         try {
             const res = await fetch(`/.netlify/functions/pre_survey?id=${studyID}`, {
-                method: "QUERY",
+                method: "GET",
             });
             if (!res.ok) {
                 throw new Error("Something went wrong saving your information. Please try again.");
@@ -118,7 +124,7 @@ function PreSurveyPage( { studyState }) {
         let studyID = studyState.id;
         try {
             const res = await fetch(`/.netlify/functions/pre_survey?id=${studyID}`, {
-                method: "QUERY",
+                method: "GET",
             });
             if (!res.ok) {
                 throw new Error("Something went wrong saving your information. Please try again.");
@@ -168,7 +174,7 @@ function PreSurveyPage( { studyState }) {
 
                 <div className="box-internal">
                     <h2>Consent document:</h2>
-                    <object className="consent-embedding" data={"src/assets/4_Scott_Teaching.pdf"} type="application/pdf">
+                    <object className="consent-embedding" data={"/4_Scott_Teaching.pdf"} type="application/pdf">
                         <p>
                             Your browser can't display PDFs. <a href={"src/assets/4_Scott_Teaching.pdf"}>Download it instead</a>.
                         </p>
