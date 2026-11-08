@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { RegExpMatcher, englishDataset, englishRecommendedTransformers } from 'obscenity';
 
@@ -13,13 +13,17 @@ function PreSurveyPage( { studyState }) {
     const navigate = useNavigate();
 
 
-    if (studyState.inConversation) {
-        navigate("/inConversation");
+    useEffect(() => {
+        if (studyState.inConversation) {
+            navigate("/inConversation");
     }
+    }, [studyState.inConversation]);
 
+    useEffect(() => {
         if (studyState.inDemographic) {
-        navigate("/inDemographic");
+            navigate("/inDemographic");
     }
+    }, [studyState.inDemographic]);
     
     const on_button_click = async () => {
         if (!prolificID || !username) {

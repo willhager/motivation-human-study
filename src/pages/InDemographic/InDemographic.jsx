@@ -19,8 +19,8 @@ function InDemographic( { studyState }) {
 
     const [buttonText, setButtonText] = useState("Continue")
 
-    const likerts_opinion = ["Strongly Disagree", "Moderately Disagree", "Slightly Disagree", "Neither Agree nor Disagree", "Slightly Agree", "Moderately Agree", "Strongly Agree"];
-    const ai_knowledge_options = ["No knowledge", "", "", "Moderate knowledge", "", "", "Extremely knowledgeable"]
+    const likerts_opinion = ["1. Strongly Disagree", "2. Moderately Disagree", "3. Slightly Disagree", "4. Neither Agree nor Disagree", "5. Slightly Agree", "6. Moderately Agree", "7. Strongly Agree"];
+    const ai_knowledge_options = ["1. No knowledge", "2", "3", "4. Moderate knowledge", "5", "6", "7. Extremely knowledgeable"]
     const age_options = ["18-24", "25-34", "35-44", "45-54", "55-64", "65+"]
     const gender_options = ["Female", "Male", "Non-Binary", "Prefer not to answer"]
     const race_options = ["White", "Black or African American", "Hispanic", "Asian", "Native American or Alaska Native", "Other"]
@@ -48,6 +48,12 @@ function InDemographic( { studyState }) {
 
     const save = async () => {
         setButtonText("Loading...");
+        let userAge = age_options[age - 1];
+        let userGender = gender_options[gender - 1];
+        let userRace = race_options[race - 1];
+        let userEdu = edu_options[edu - 1];
+        let userPol = pol_options[pol - 1];
+        let userPolStr = pol_str_options[polstr - 1];
         try {
             const res = await fetch("/.netlify/functions/demographics", {
                 method: "POST",
@@ -56,13 +62,13 @@ function InDemographic( { studyState }) {
                 },
                 body: JSON.stringify({
                     prolificID,
-                    age,
-                    gender,
-                    race,
-                    edu, 
+                    age : userAge,
+                    gender: userGender,
+                    race: userRace,
+                    edu: userEdu, 
                     eduBackground,
-                    pol,
-                    polstr,
+                    pol: userPol,
+                    polstr: userPolStr,
                     generalAIAttitude,
                     classroomAIAttitude,
                     initialKnowledge
@@ -98,8 +104,8 @@ function InDemographic( { studyState }) {
                         <input className="input-short" type="text" required  onChange={e => setProlificID(e.target.value)}></input>
                     </div>
 
-                    <div>Demographic Questions</div>
-                    <p>Age</p>
+                    <div className="row-centered"><h3>Demographic Questions</h3></div>
+                    <h4 className="centered-no-margin">Age</h4>
                     <div className="row-centered">
                         {Array.from({ length: 6 }, (_, i) => {
                             const value = i + 1;
@@ -118,7 +124,7 @@ function InDemographic( { studyState }) {
                         })}
                     </div>
                     <br></br>
-                    <p>Gender</p>
+                    <h4 className="centered-no-margin">Gender</h4>
                     <div className="row-centered">
                         {Array.from({ length: 4 }, (_, i) => {
                             const value = i + 1;
@@ -137,7 +143,7 @@ function InDemographic( { studyState }) {
                         })}
                     </div>
                     <br></br>
-                    <p>Race</p>
+                    <h4 className="centered-no-margin">Race</h4>
                     <div className="row-centered">
                         {Array.from({ length: 6 }, (_, i) => {
                             const value = i + 1;
@@ -156,7 +162,7 @@ function InDemographic( { studyState }) {
                         })}
                     </div>
                     <br></br>
-                    <p>Education Level</p>
+                    <h4 className="centered-no-margin">Education Level</h4>
                     <div className="row-centered">
                         {Array.from({ length: 5 }, (_, i) => {
                             const value = i + 1;
@@ -175,11 +181,11 @@ function InDemographic( { studyState }) {
                         })}
                     </div>
                     <br></br>
-                    <div>
+                    <div className="row-centered">
                         <h3>Please enter your major:</h3>
                         <input className="input-short" type="text" required  onChange={e => setEduBackground(e.target.value)}></input>
                     </div>
-                    <p>Political Affiliation</p>
+                    <h4 className="centered-no-margin">Political Affiliation</h4>
                     <div className="row-centered">
                         {Array.from({ length: 4 }, (_, i) => {
                             const value = i + 1;
@@ -198,7 +204,7 @@ function InDemographic( { studyState }) {
                         })}
                     </div>
                     <br></br>
-                    <p>Strength of Political Affiliation</p>
+                    <h4 className="centered-no-margin">Strength of Political Affiliation</h4>
                     <div className="row-centered">
                         {Array.from({ length: 4 }, (_, i) => {
                             const value = i + 1;
@@ -218,7 +224,7 @@ function InDemographic( { studyState }) {
                     </div>
                     <br></br>
 
-                    <div>Generative AI Questions</div>
+                    <h3 className="row-centered">Generative AI Questions</h3>
                     <p>On a scale from 1-7, where 1 = “Strongly Disagree” and 7 = “Strongly Agree”, what is your current stance towards generative AI, generally?</p>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
@@ -278,9 +284,9 @@ function InDemographic( { studyState }) {
                         })}
                     </div>
                     <br></br>
+                    <button className="next-button" type="button" onClick={on_button_click} disabled={buttonText === "Loading..."}>{buttonText}</button>
+                    <div> <h2 className="error-message">{errorMessage}</h2> </div>
                 </div>
-                <button type="button" onClick={on_button_click} disabled={buttonText === "Loading..."}>{buttonText}</button>
-                <div> <h2 className="error-message">{errorMessage}</h2> </div>
             </div>
         </div>
         </>

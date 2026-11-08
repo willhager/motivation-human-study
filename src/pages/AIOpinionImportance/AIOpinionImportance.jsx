@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 
-import "./AIOpinionImportance.css"
 
 function AIOpinionImportance({ studyState }) {
     const [opinionStrength, setopinionStrength] = useState(null);

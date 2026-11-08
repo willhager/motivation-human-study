@@ -11,5 +11,10 @@
 
 .error-message{
     color: red;
-    
+}
+
+.centered-no-margin {
+    align-self: center;
+    margin: 0px;
+    margin-top: 8px;
 }
