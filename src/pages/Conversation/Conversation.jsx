@@ -174,7 +174,7 @@ function Conversation( { studyState } ) {
     useEffect(() => {
         if (secondsLeft <= 0) {
             localStorage.removeItem(`deadline-${uID}`);
-            // navigate("/7", { replace: true, state: { username, uID, secondsTyping : secondsTypingRef.current, secondsReading: secondsReadingRef.current} });
+            navigate("/postconversation", { replace: true, state: { username, uID, secondsTyping : secondsTypingRef.current, secondsReading: secondsReadingRef.current} });
         }
     }, [secondsLeft, navigate, username, uID]);
 
@@ -186,6 +186,7 @@ function Conversation( { studyState } ) {
 
     return (
         <div className="page">
+            <h1>Discussion of AI Policy</h1>
             <div className="header-absolute">
                 <div className="time-remaining-box">
                     <h3>Timer: {minutes}:{String(seconds).padStart(2, "0")} remaining</h3>

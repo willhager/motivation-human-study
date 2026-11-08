@@ -19,6 +19,7 @@ function PostSurvey({ studyState }) {
 
     const likerts_support = ["Strongly Oppose", "Moderately Oppose", "Slightly Oppose", "Neither Oppose nor Support", "Slightly Support", "Moderately Support", "Strongly Support"];
     const likerts_opinion = ["Strongly Disagree", "Moderately Disagree", "Slightly Disagree", "Neither Agree nor Disagree", "Slightly Agree", "Moderately Agree", "Strongly Agree"];
+    const ai_knowledge_options = ["No knowledge", "", "", "Moderate knowledge", "", "", "Extremely knowledgeable"]
 
     const on_button_clicked = async () => {
         if (generalAIAttitude == null || classroomAIAttitude == null || initialKnowledge == null || policyOpinion == null || partnerCredibility == null || attentionCheck == null) {
@@ -27,7 +28,7 @@ function PostSurvey({ studyState }) {
         else {
             const id = await save();
             if (id){
-                navigate("/8", {replace: true, state: {username, uID, insertedID: id}});
+                navigate("/debrief1", {replace: true, state: {username, uID, insertedID: id}});
             }
         }
     }
@@ -77,6 +78,7 @@ function PostSurvey({ studyState }) {
     return (
         <div className="page">
             <div className="box">
+                <h1>Post Conversation Survey</h1>
                 <div className="box-internal">
 
                     <p>On a scale from 1-7, where 1 = “Strongly Disagree” and 7 = “Strongly Agree”, what is your current stance towards generative AI, generally?</p>
@@ -135,7 +137,7 @@ function PostSurvey({ studyState }) {
                                 onChange={() => setInitialKnowledge(value)}
                                 />
                                 <p>{value}</p>
-                                <p>test level of knowledge</p>
+                                <p>{ai_knowledge_options[value-1]}</p>
                             </div>
                             );
                         })}
@@ -177,7 +179,7 @@ function PostSurvey({ studyState }) {
                                 onChange={() => setPartnerCredibility(value)}
                                 />
                                 <p>{value}</p>
-                                <p>test level of support</p>
+                                <p>"here"</p>
                             </div>
                             );
                         })}

@@ -1,14 +1,13 @@
 import {useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 
-import "./AIOpinionImportance.css"
 
 function AIOpinionImportance({ studyState }) {
     const [opinionStrength, setopinionStrength] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
     const [buttonText, setButtonText] = useState("Continue");
 
-    const likert_values = ["text1 text1 text1", "text2 text2 text2", "text3 text3 text3", "text4 text4 text4", "text5 text5 text5", "text6 text6", "text7 text7"];
+    const likert_values = ["Not too important", "", "", "Moderately important", "", "", "Extremely important"];
 
     const navigate = useNavigate();
     const state = useLocation();
@@ -26,7 +25,7 @@ function AIOpinionImportance({ studyState }) {
         else {
             const ok = await save();
             if (ok){
-                navigate("/3", {replace: true, state: {username, uID, insertedID}});
+                navigate("/waiting", {replace: true, state: {username, uID, insertedID}});
             }
         }
     }
@@ -61,6 +60,7 @@ function AIOpinionImportance({ studyState }) {
     return (
         <div className="page">
             <div className="box">
+                <h1>Importance of Opinion on AI Usage</h1>
                 <div className="box-internal">
                     <p>On a scale from 1-7, where 1 = “Not important at all” and 7 = “Extremely important”, how important is your opinion on AI usage to you?</p>
                     <div className="row-centered">

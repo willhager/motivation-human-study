@@ -16,6 +16,8 @@ import Debrief from "./pages/Debrief/Debrief"
 import InConversation from "./pages/InConversation/InConversation";
 
 import "./App.css";
+import InDemographic from "./pages/inDemographic/InDemographic";
+import CompletedRegistration from "./pages/CompletedRegistration/CompletedRegistration";
 
 function AppRoutes() {
   const [studyState, setStudyState] = useState({});
@@ -45,22 +47,27 @@ function AppRoutes() {
   if (studyState.active !== true) {
     return <Inactive />;
   }
+  // if (studyState.inDemographic == true) {
+  //   return <InDemographic />;
+  // }
 
   return (
     <Routes>
       <Route path="/" element={<PreSurveyPage studyState={studyState} />} />
-      <Route path="/1" element={<Primes studyState={studyState} />} />
-      <Route path="/2" element={<AIOpinionImportance studyState={studyState} />}/>
-      <Route path="/3" element={<Waiting studyState={studyState} />}/>
-      <Route path="/4" element={<PolicyMessaging studyState={studyState} />}/>
-      <Route path="/5" element={<ConversationalSetup studyState={studyState} />}/>
-      <Route path="/6" element={<Conversation studyState={studyState} />}/>
-      <Route path="/7" element={<PostSurvey studyState={studyState} />}/>
-      <Route path="/8" element={<PostSurveyOpen1 studyState={studyState}/>}/>
-      <Route path="/9" element={<PostSurveyOpen2 studyState={studyState}/>}/>
-      <Route path="/10" element={<PostSurveySuspicion studyState={studyState}/>}/>
-      <Route path="/11" element={<Debrief studyState={studyState}/>}/>
+      <Route path="/reflection" element={<Primes studyState={studyState} />} />
+      <Route path="/importance" element={<AIOpinionImportance studyState={studyState} />}/>
+      <Route path="/waiting" element={<Waiting studyState={studyState} />}/>
+      <Route path="/policy" element={<PolicyMessaging studyState={studyState} />}/>
+      <Route path="/conversationbrief" element={<ConversationalSetup studyState={studyState} />}/>
+      <Route path="/conversation" element={<Conversation studyState={studyState} />}/>
+      <Route path="/postconversation" element={<PostSurvey studyState={studyState} />}/>
+      <Route path="/debrief1" element={<PostSurveyOpen1 studyState={studyState}/>}/>
+      {/*<Route path="/debrief2" element={<PostSurveyOpen2 studyState={studyState}/>}/>*/}
+      <Route path="/debrief3" element={<PostSurveySuspicion studyState={studyState}/>}/>
+      <Route path="/exit" element={<Debrief studyState={studyState}/>}/>
       <Route path="/inConversation" element={<InConversation />}/>
+      <Route path="/inDemographic" element={<InDemographic studyState={studyState}/>}/>
+      <Route path="/completedRegistration" element={<CompletedRegistration/>}/>
     </Routes>
   );
 }
