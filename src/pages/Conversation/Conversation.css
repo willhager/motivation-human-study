@@ -8,6 +8,11 @@
     min-width: 30%;
 }
 
+.conversation section {
+    display: flex;
+    flex-direction: column;
+}
+
 .conversation-item.green {
     background-color: lightgreen;
     border: 2px solid green;
@@ -40,6 +45,15 @@
     border: 2px solid purple;
 }
 
+.flash {
+    animation: flash-bg 1.5s ease;
+}
+
+@keyframes flash-bg {
+    0%, 100% { background-color: transparent; }
+    30% { background-color: rgba(255, 255, 0, 0.4); }
+}
+
 .conversation-item-header-row {
     display: flex;
     flex-direction: row;
@@ -57,6 +71,12 @@
 .conversation-item p {
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.conversation-p-small-no-margin {
+    font-size: 0.8rem;
+    margin: 0;
+    cursor: pointer;
 }
 
 .conversation-box-internal {
@@ -125,13 +145,50 @@
     justify-content: center;
 }
 
-
 .time-remaining-box{
     margin: 10px;
     padding: 0px 10px;
     border-radius: 16px;
     background-color: lightgrey;
     border: 2px solid darkgray;
+}
+
+.reply-button {
+    margin-top: 0px;
+    border-radius: 10px;
+    border: 1px solid var(--main-contrast);
+    background-color: var(--main-contrast);
+    color: var(--main-background);
+    font-size: .8rem;
+    padding: 5px 8px;
+    transition: transform 0.2s ease;
+    margin-top: 10px;
+    align-self: start;
+    cursor: pointer;
+}
+
+.conversation-replying-to-line-row {
+    width: 80%;
+    align-self: center;
+    border-radius: 18px;
+    padding: 3px 8px 3px 8px;
+    display: flex;
+    flex-direction: row;
+    margin: 0px;
+    background-color: lightgrey;
+    justify-content: space-between;
+}
+
+.conversation-replying-to-line {
+    margin: 0px;
+}
+
+.replying-to-line-x {
+    background-color: black;
+    border: 0px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 body.no-scroll {

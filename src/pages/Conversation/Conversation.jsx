@@ -13,6 +13,10 @@ function Conversation( { studyState } ) {
     const [conversation, setConversation] = useState([]);
     const [userResponse, setUserResponse] = useState("");
 
+    const [replyingTo, setReplyingTo] = useState(null);
+    const [replyingToName, setReplyingToName] = useState(null);
+    const [replyingToHead, setReplyingToHead] = useState(null);
+
     const [instructionPopup, setInstructionPopup] = useState(false);
 
     const typingStartRef = useRef(null);
@@ -62,6 +66,8 @@ function Conversation( { studyState } ) {
 
     //db push
     const updateConversation = async (response) => {
+        let timestamp = new Date().toISOString();
+        let messageId = uID + timestamp;
         try {
             const res = await fetch(`/.netlify/functions/conversations?id=${id}`, {
                 method: "PATCH",
@@ -72,7 +78,11 @@ function Conversation( { studyState } ) {
                     username,
                     uID,
                     response,
-                    timestamp: new Date().toISOString()
+                    timestamp: timestamp,
+                    messageId: messageId,
+                    replyingTo: replyingTo,
+                    replyingToName: replyingToName,
+                    replyingToHead: replyingToHead
                 }),
             });
             if (!res.ok) {
@@ -81,6 +91,17 @@ function Conversation( { studyState } ) {
         } catch(err) {
             console.log(err);
         }
+    }
+
+    const set_replying = (item) => {
+        if (item === null) {
+            setReplyingTo(null);
+            setReplyingToName(null);
+            return;
+        }
+        setReplyingTo(item.messageId); 
+        setReplyingToName(item.username);
+        setReplyingToHead(item.response.slice(0, 20));
     }
 
     // when send button is pressed
@@ -92,6 +113,9 @@ function Conversation( { studyState } ) {
         typingStartRef.current = null;
         secondsTypingRef.current.push(elapsed);
         setUserResponse("");
+        setReplyingTo(null);
+        setReplyingToName(null);
+        setReplyingToHead(null);
         await updateConversation(response);
         await fetchConversation();
     }
@@ -178,24 +202,41 @@ function Conversation( { studyState } ) {
                         }
                         color = item.uID === uID ? "green" : colorByUser[item.uID];
                         return (
-                            <div className={`conversation-item ${color}`} key={index}>
-                                <div className="conversation-item-header-row">
-                                    <h4>{item.username}</h4>
-                                    <h4>{new Date(item.timestamp).toLocaleString("en-US", {
-                                        month: "2-digit",
-                                        day: "2-digit",
-                                        year: "numeric",
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                        hour12: false,
-                                        })}</h4>
+                            <section id={item.messageId} key={item.messageId}>
+                                <div className={`conversation-item ${color}`}>
+                                    <div className="conversation-item-header-row">
+                                        <h4>{item.username}</h4>
+                                        <h4>{new Date(item.timestamp).toLocaleString("en-US", {
+                                            month: "2-digit",
+                                            day: "2-digit",
+                                            year: "numeric",
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                            hour12: false,
+                                            })}</h4>
+                                    </div>
+                                    {item.replyingTo && <p className="conversation-p-small-no-margin" onClick={() => {
+                                                                                                            const el = document.getElementById(item.replyingTo);
+                                                                                                            if (!el) return;
+                                                                                                            el.scrollIntoView({ behavior: "smooth", block: "center" });
+                                                                                                            el.classList.add("flash");
+                                                                                                            setTimeout(() => el.classList.remove("flash"), 1500);
+                                                                                                        }}>Replying to {item.replyingToName}: {item.replyingToHead}...</p>}
+                                    <p>{item.response}</p>
+                                    {color !== "green" && <button  className="reply-button" onClick={() => {set_replying(item)}}>Reply</button>}
                                 </div>
-                                <p>{item.response}</p>
-                            </div>
+                            </section>
                         )
                         })}
                         <div ref={bottomRef} />
                     </div>
+                    {replyingToName &&
+                        <div className="conversation-replying-to-line-row">
+                            <p className="conversation-replying-to-line">Replying to: {replyingToName}</p>
+                            <button className="replying-to-line-x" onClick={() => set_replying(null)}>X</button>
+                        </div>
+                        
+                    }  
                     <div className="conversation-row-centered">
                         <textarea id="user-input" value={userResponse} onChange={e => updateUserResponse(e.target.value)} onKeyDown={handleKeyDown}/>
                         <button className="conversation-next-button" onClick={() => send_update(userResponse)}>Send</button>
