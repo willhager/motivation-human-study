@@ -184,6 +184,11 @@ function Conversation( { studyState } ) {
     let colorByUser = {uID: "green"};
     const colors = ["orange", "yellow", "blue", "red", "purple", "brown"];
 
+    const emojiRegex =
+        /[\p{Extended_Pictographic}\p{Emoji_Modifier}\u{1F1E6}-\u{1F1FF}\u{E0020}-\u{E007F}\u200D\uFE0F\u20E3]/gu;
+
+    const stripEmojis = (str) => str.replace(emojiRegex, "");
+
 
     return (
         <div className="page">
@@ -240,7 +245,7 @@ function Conversation( { studyState } ) {
                         
                     }  
                     <div className="conversation-row-centered">
-                        <textarea id="user-input" value={userResponse} onChange={e => updateUserResponse(e.target.value)} onKeyDown={handleKeyDown}/>
+                        <textarea id="user-input" value={userResponse} onChange={e => updateUserResponse(stripEmojis(e.target.value))} onKeyDown={handleKeyDown}/>
                         <button className="conversation-next-button" onClick={() => send_update(userResponse)}>Send</button>
                     </div>
                 </div>
