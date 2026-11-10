@@ -2,6 +2,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {useState, useEffect, useRef} from 'react';
 
 import InstructionPopup from "./InstructionPopup";
+import Linkify from "./Linkify";
 
 import "./Conversation.css";
 
@@ -223,7 +224,7 @@ function Conversation( { studyState } ) {
                                                                                                             el.classList.add("flash");
                                                                                                             setTimeout(() => el.classList.remove("flash"), 1500);
                                                                                                         }}>Replying to {item.replyingToName}: {item.replyingToHead}...</p>}
-                                    <p>{item.response}</p>
+                                    <p><Linkify text={item.response} /></p>
                                     {color !== "green" && <button  className="reply-button" onClick={() => {set_replying(item)}}>Reply</button>}
                                 </div>
                             </section>
