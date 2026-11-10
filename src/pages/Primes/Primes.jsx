@@ -42,6 +42,7 @@ function Primes({ studyState }) {
         setButtonText("Loading...");
         let body = ""
         let condition = studyState.condition
+        let studyID = studyState.id;
         if (studyState.condition == "directional"){
             body = JSON.stringify({
                     uID,
@@ -49,6 +50,7 @@ function Primes({ studyState }) {
                     response1,
                     response2,
                     condition,
+                    studyID,
                     timestamp: new Date().toISOString(),
                 })
         }
@@ -58,6 +60,7 @@ function Primes({ studyState }) {
                     username,
                     response1,
                     condition,
+                    studyID,
                     timestamp: new Date().toISOString(),
                 })
         }

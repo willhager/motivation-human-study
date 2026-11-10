@@ -38,6 +38,7 @@ function PostSurvey({ studyState }) {
         setButtonText("Loading...");
         const condition = studyState.condition;
         const policy = studyState.policy;
+        let studyID = studyState.id;
         try {
             const res = await fetch(`/.netlify/functions/post_survey`, {
                 method: "POST",
@@ -49,6 +50,7 @@ function PostSurvey({ studyState }) {
                     uID,
                     condition,
                     policy,
+                    studyID,
                     generalAIAttitude,
                     classroomAIAttitude,
                     initialKnowledge,

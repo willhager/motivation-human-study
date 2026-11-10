@@ -12,7 +12,7 @@ function ConversationalSetup({studyState}) {
     let conditionText = ""
     switch (condition) {
         case "directional":
-            conditionText = "We would like to reemphasize that the University is interested in student opinions, and encourage you to share your position openly during the conversation.";
+            conditionText = "We would like to reemphasize that we are interested in student opinions, and encourage you to share your position openly during the conversation.";
             break;
         case "accuracy":
             conditionText = "We would like to reemphasize that you keep an open mind about the policy during the conversation.";
@@ -59,7 +59,8 @@ function ConversationalSetup({studyState}) {
             <div className="box">
                 <h1>Discussion of AI Policy</h1>
                 <div className="box-internal">
-                    <p>You will now interact with another student virtually regarding the policy you just received. Both you and the other student saw the same policy. Please provide at least 5 responses to the conversation to receive payment. Please take 10 minutes to discuss the topic and the topic only. While the topic covers generative AI, the study is interested in the true opinions of students, so please write your own responses. Failure to comply with staying on topic and using AI will result in a lack of payment. Additionally, feel free to open additional tabs to find outside information to support the conversation. Again, we would like to emphasize that if you use outside information that it be from human written opinions or articles (and not AI generated summaries of information). Please do not include any personally identifiable information (PII) such as names, emails, etc. in your conversations.</p>
+                    <p>You will now interact with other students virtually regarding the policy you just received. Both you and the other student saw the same policy. Please do not include any personally identifiable information (PII) such as names, emails, etc. in your conversations. Please provide at least 5 responses to the conversation to receive payment. Please take 10 minutes to discuss the topic and the topic only. While the topic covers generative AI, the study is interested in the true opinions of students, so please write your own responses. Failure to comply with staying on topic and using AI will result in a lack of payment. </p>
+                    <p>Additionally, feel free to open additional tabs to find outside information to support the conversation. Again, we would like to emphasize that if you use outside information that it be from human written opinions or articles (and not AI generated summaries of information).</p>
                 </div>
                 <div className="box-internal">
                     <p>{conditionText}</p>

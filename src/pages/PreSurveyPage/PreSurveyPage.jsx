@@ -158,7 +158,7 @@ function PreSurveyPage( { studyState }) {
             <div className="box">
                 <div className="box-internal">
                     <p> 
-                        Thank you for joining our study! It will begin shortly. Please provide the unique code you were given upon registration, read the consent form, and then click through to the next page where the study will begin. During the study, you will be asked a few questions, presented with some information, then engage in a virtual, text-based conversation with another individual about the information you are shown. Afterwards, you will be asked a few more questions and then be debriefed and exit the survey. You should receive payment for your participation shortly after completion of the study.
+                        Thank you for joining our study! It will begin shortly. Please provide your Prolific ID and username and read the consent form, then click through to the next page where the study will begin. During the study, you will be asked a few questions, presented with some information, then engage in a virtual, text-based conversation with another individual about the information you are shown. Afterwards, you will be asked a few more questions and then be debriefed and exit the survey. You should receive payment for your participation shortly after completion of the study.
                     </p>
                     
                     <div className="row-centered">
@@ -174,9 +174,9 @@ function PreSurveyPage( { studyState }) {
 
                 <div className="box-internal">
                     <h2>Consent document:</h2>
-                    <object className="consent-embedding" data={"/4_Scott_Teaching.pdf"} type="application/pdf">
+                    <object className="consent-embedding" data={"/consent_form.docx.pdf"} type="application/pdf">
                         <p>
-                            Your browser can't display PDFs. <a href={"src/assets/4_Scott_Teaching.pdf"}>Download it instead</a>.
+                            Your browser can't display PDFs. <a href={"/consent_form.docx.pdf"}>Download it instead</a>.
                         </p>
                     </object>
                     <div className="row-centered">
