@@ -16,7 +16,7 @@ function PostSurveyOpen1({studyState}) {
         }
         const id = await save()
         if (id){
-                navigate("/debrief2", {replace: true, state: {username, uID, insertedID: id}});
+                navigate("/debrief3", {replace: true, state: {username, uID, insertedID: id}});
         }
 
     }
