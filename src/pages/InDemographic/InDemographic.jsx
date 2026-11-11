@@ -20,7 +20,7 @@ function InDemographic( { studyState }) {
     const [buttonText, setButtonText] = useState("Continue")
 
     const likerts_opinion = ["1. Strongly Disagree", "2. Moderately Disagree", "3. Slightly Disagree", "4. Neither Agree nor Disagree", "5. Slightly Agree", "6. Moderately Agree", "7. Strongly Agree"];
-    const ai_knowledge_options = ["1. No knowledge", "2", "3", "4. Moderate knowledge", "5", "6", "7. Extremely knowledgeable"]
+    const ai_knowledge_options = ["1. No knowledge", "2. A little knowledge", "3. Some knowledge", "4. Moderate knowledge", "5. Decent knowledge", "6. Very knowledgeable", "7. Expert knowledge"]
     const age_options = ["18-24", "25-34", "35-44", "45-54", "55-64", "65+"]
     const gender_options = ["Female", "Male", "Non-Binary", "Prefer not to answer"]
     const race_options = ["White", "Black or African American", "Hispanic", "Asian", "Native American or Alaska Native", "Other"]
@@ -225,7 +225,7 @@ function InDemographic( { studyState }) {
                     <br></br>
 
                     <h3 className="row-centered">Generative AI Questions</h3>
-                    <p>On a scale from 1-7, where 1 = “Strongly Disagree” and 7 = “Strongly Agree”, what is your current stance towards generative AI, generally?</p>
+                    <h4>On a scale from 1-7, where 1 = “Strongly Disagree” and 7 = “Strongly Agree”, what is your current stance towards generative AI, generally?</h4>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;
@@ -245,7 +245,7 @@ function InDemographic( { studyState }) {
                     </div>
                     <br></br>
 
-                    <p>On a scale from 1-7, where 1 = “Strongly Disagree” and 7 = “Strongly Agree”, what is your current stance towards generative AI, specifically in a University setting?</p>
+                    <h4>On a scale from 1-7, where 1 = “Strongly Disagree” and 7 = “Strongly Agree”, what is your current stance towards generative AI, specifically in a University setting?</h4>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;
@@ -265,7 +265,7 @@ function InDemographic( { studyState }) {
                     </div>
                     <br></br>
 
-                    <p>On a scale from 1-7, where 1 = “No knowledge” and 7 = “Expert knowledge”, how knowledgeable are you about generative AI usage?</p>
+                    <h4>On a scale from 1-7, where 1 = “No knowledge” and 7 = “Expert knowledge”, how knowledgeable are you about generative AI usage?</h4>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;
