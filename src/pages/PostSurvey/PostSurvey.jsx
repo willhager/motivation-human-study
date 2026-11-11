@@ -8,6 +8,7 @@ function PostSurvey({ studyState }) {
     const [policyOpinion, setPolicyOpinion] = useState(null);
     const [partnerCredibility, setPartnerCredibility] = useState(null);
     const [attentionCheck, setAttentionCheck] = useState(null);
+    const [attentionCheckPrime, setAttentionCheckPrime] = useState(null);
 
     const [errorText, setErrorText] = useState(null);
 
@@ -19,10 +20,11 @@ function PostSurvey({ studyState }) {
 
     const likerts_support = ["Strongly Oppose", "Moderately Oppose", "Slightly Oppose", "Neither Oppose nor Support", "Slightly Support", "Moderately Support", "Strongly Support"];
     const likerts_opinion = ["Strongly Disagree", "Moderately Disagree", "Slightly Disagree", "Neither Agree nor Disagree", "Slightly Agree", "Moderately Agree", "Strongly Agree"];
-    const ai_knowledge_options = ["No knowledge", "", "", "Moderate knowledge", "", "", "Extremely knowledgeable"]
+    const ai_knowledge_options = ["Not knowledgeable at all", "A little knowledgeable", "Somewhat knowledgeable", "Moderately knowledgeable", "Decently knowledgeable", "Very knowledgeable", "Expertly knowledgeable"]
+    const partner_credibility = ["Not credible at all", "A little credible", "Somewhat credible", "Moderately credible", "Decently credible", "Very credible", "Extremely credible"]
 
     const on_button_clicked = async () => {
-        if (generalAIAttitude == null || classroomAIAttitude == null || initialKnowledge == null || policyOpinion == null || partnerCredibility == null || attentionCheck == null) {
+        if (generalAIAttitude == null || classroomAIAttitude == null || initialKnowledge == null || policyOpinion == null || partnerCredibility == null || attentionCheck == null || attentionCheckPrime == null) {
             setErrorText("Please answer all questions on this page");
         }
         else {
@@ -146,7 +148,7 @@ function PostSurvey({ studyState }) {
                     </div>
                     <br></br>
 
-                    <p>On a scale from 1-7, where 1 = “Strongly Disapprove” and 7 = “Strongly Support”, what is your stance on the AI policy the University is considering?</p>
+                    <p>On a scale from 1-7, where 1 = “Strongly Oppose” and 7 = “Strongly Support”, what is your stance on the AI policy the University is considering?</p>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;
@@ -160,7 +162,7 @@ function PostSurvey({ studyState }) {
                                 onChange={() => setPolicyOpinion(value)}
                                 />
                                 <p>{value}</p>
-                                <p>test level of approval</p>
+                                <p>{likerts_support[value-1]}</p>
                             </div>
                             );
                         })}
@@ -181,7 +183,7 @@ function PostSurvey({ studyState }) {
                                 onChange={() => setPartnerCredibility(value)}
                                 />
                                 <p>{value}</p>
-                                <p>"here"</p>
+                                <p>{partner_credibility[value-1]}</p>
                             </div>
                             );
                         })}
@@ -209,6 +211,31 @@ function PostSurvey({ studyState }) {
                             onChange={() => setAttentionCheck("anti")}
                             />
                             <p>anti-AI</p>
+                        </div>
+
+                    </div>
+
+                    <p>What was your instruction for participating in the conversation?</p>
+                    <div className="row-centered">
+                        <div className="likert-item" key={"attentionCheckPrime"}>
+                            <input
+                            type="radio"
+                            name="attentionCheckPrime"
+                            value="Keep an open mind about the policy"
+                            checked={attentionCheckPrime === "Keep an open mind about the policy"}
+                            onChange={() => setAttentionCheckPrime("Keep an open mind about the policy")}
+                            />
+                            <p>Keep an open mind about the policy</p>
+                        </div>
+                        <div className="likert-item" key={"attentionCheckPrime"}>
+                            <input
+                            type="radio"
+                            name="attentionCheckPrime"
+                            value="Encourage you to share your position openly"
+                            checked={attentionCheckPrime === "Encourage you to share your position openly"}
+                            onChange={() => setAttentionCheckPrime("Encourage you to share your position openly")}
+                            />
+                            <p>Encourage you to share your position openly</p>
                         </div>
 
                     </div>

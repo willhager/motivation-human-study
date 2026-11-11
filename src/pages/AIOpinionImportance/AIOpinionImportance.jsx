@@ -7,7 +7,7 @@ function AIOpinionImportance({ studyState }) {
     const [errorMessage, setErrorMessage] = useState(null);
     const [buttonText, setButtonText] = useState("Continue");
 
-    const likert_values = ["Not too important", "", "", "Moderately important", "", "", "Extremely important"];
+    const likert_values = ["Not important at all", "Of little importance", "Slightly important", "Moderately important", "Very important",  "Extremely important", "Absolutely essential"];
 
     const navigate = useNavigate();
     const state = useLocation();

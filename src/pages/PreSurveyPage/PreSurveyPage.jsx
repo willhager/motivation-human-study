@@ -157,15 +157,19 @@ function PreSurveyPage( { studyState }) {
         <div className="page">
             <div className="box">
                 <div className="box-internal">
-                    <p> 
-                        Thank you for joining our study! It will begin shortly. Please provide your Prolific ID and username and read the consent form, then click through to the next page where the study will begin. During the study, you will be asked a few questions, presented with some information, then engage in a virtual, text-based conversation with another individual about the information you are shown. Afterwards, you will be asked a few more questions and then be debriefed and exit the survey. You should receive payment for your participation shortly after completion of the study.
-                    </p>
-                    
+                    <p> Thank you for joining our study! It will begin shortly. Please provide your Prolific ID, read the consent form, and then click through to the next page where the study will begin. </p>
+                    <p>During the study, you will be asked a few questions, presented with some information, then engage in a virtual, text-based conversation with another individual about the information you are shown. Afterwards, you will be asked a few more questions and then be debriefed and exit the survey. You should receive payment for your participation shortly after completion of the study. Please allow up to one business week to receive payment to allow the research team to verify your engaged participation. If you withdraw consent after completing the study, you will still receive payment for your time. However, if you fail our attention checks embedded within the study, you will not receive compensation.</p>
+                    <h4>NOTE – the anonymized conversations may be made public alongside our academic paper, so avoid entering any personally identifiable information (PII) about you or any real person.</h4>
+                    <p>Although your identifying information will be removed, there is still a small risk that someone could infer your identity from speaking style or contextual information. We will use rigorous anonymization procedures, but complete anonymity cannot be guaranteed.</p>
+                    <p>The task, including reading these instructions, interaction, and the survey, is expected to take less than 15-30 minutes for each interaction.</p>
+                    <p>Contact for any support: npate@ur.rochester.edu </p>
+
                     <div className="row-centered">
                         <h3>*Prolific ID:</h3>
                         <input className="input-short" type="text" required  onChange={e => setProlificID(e.target.value)}></input>
                     </div>
-                    <p>Please also pick a username for the virtual, text-based conversation portion of the study. Please avoid any using any personally-identifying information in your username (eg. full names, location, etc).</p>
+                    <p>Please also pick a username for the virtual, text-based conversation portion of the study.</p>
+                    <h4>Please avoid any using any personally-identifying information in your username (eg. full names, location, etc).</h4>
                     <div className="row-centered">
                         <h3>*Username: </h3>
                         <input className="input-short" type="text" required onChange={e => setUsername(e.target.value)}></input>
