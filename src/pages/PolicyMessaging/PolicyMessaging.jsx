@@ -59,7 +59,7 @@ function PolicyMessaging({studyState}) {
             <div className="box">
                 <h1>University Considered AI Policy</h1>
                 <div className="box-internal">
-                    <p>With the rapid pace of advancement in the artificial intelligence (AI) field, your state university system is currently considering whether or not to create policy and regulation around the use of AI in the classroom. Given this policy will take effect at the university level, they are interested in learning about the student population’s stance on AI use in the classroom. More importantly, the University has partnered with the Computer Science department at the University of Rochester to administer surveys and discussions about the proposed policy and its persuasiveness.</p>
+                    <p>With the rapid pace of advancement in the artificial intelligence (AI) field, your state university system is currently considering whether or not to create policy and regulation around the use of AI in the classroom. Given this policy will take effect at the university level, they are interested in learning about the student population’s stance on AI use in the classroom. More importantly, your university system has partnered with the Computer Science department at the University of Rochester to administer surveys and discussions about the proposed policy and its persuasiveness.</p>
                 </div>
                 <div className="box-internal">
                     <h3 className="no-bottom-margin">Policy:</h3>

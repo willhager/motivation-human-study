@@ -10,6 +10,8 @@ function PostSurveyBelievability() {
     const state = useLocation();
     const {username, uID, insertedID} = state.state;
 
+    const believable = ["Not believable at all", "A little believable", "Somewhat believable", "Moderately believable", "Decently believable", "Very believable", "Extremely believable"]
+
     const on_button_clicked = async () => {
         if (!believabilityScore) {
             setErrorMessage("Please ensure you've responded to all questions on the page.");
@@ -69,6 +71,7 @@ function PostSurveyBelievability() {
                                 onChange={() => setBelievabilityScore(value)}
                                 />
                                 <p>{value}</p>
+                                <p>{believable[value - 1]}</p>
                             </div>
                             );
                         })}
