@@ -62,7 +62,7 @@ function AppRoutes() {
       <Route path="/conversation" element={<Conversation studyState={studyState} />}/>
       <Route path="/postconversation" element={<PostSurvey studyState={studyState} />}/>
       <Route path="/debrief1" element={<PostSurveyOpen1 studyState={studyState}/>}/>
-      {/*<Route path="/debrief2" element={<PostSurveyOpen2 studyState={studyState}/>}/>*/}
+      {<Route path="/debrief2" element={<PostSurveyOpen2 studyState={studyState}/>}/>}
       <Route path="/debrief3" element={<PostSurveySuspicion studyState={studyState}/>}/>
       <Route path="/exit" element={<Debrief studyState={studyState}/>}/>
       <Route path="/inConversation" element={<InConversation />}/>

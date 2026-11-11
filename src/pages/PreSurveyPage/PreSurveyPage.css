@@ -1,5 +1,7 @@
 .input-short{
     margin-left: 5px;
+    height: 20px;
+    align-self: center;
 }
 
 .consent-embedding{
