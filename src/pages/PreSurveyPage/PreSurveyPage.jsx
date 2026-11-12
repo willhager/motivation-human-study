@@ -78,6 +78,7 @@ function PreSurveyPage( { studyState }) {
                     prolificID,
                     username,
                     studyID,
+                    consented,
                     timestamp: new Date().toISOString(),
                 }),
             });
