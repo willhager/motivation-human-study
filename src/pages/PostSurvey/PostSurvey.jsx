@@ -148,7 +148,7 @@ function PostSurvey({ studyState }) {
                     </div>
                     <br></br>
 
-                    <p>On a scale from 1-7, where 1 = “Strongly Oppose” and 7 = “Strongly Support”, what is your stance on the AI policy the University is considering?</p>
+                    <p>On a scale from 1-7, where 1 = “Strongly Oppose” and 7 = “Strongly Support”, what is your stance on the AI policy your university system is considering?</p>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;
@@ -200,7 +200,7 @@ function PostSurvey({ studyState }) {
                             checked={attentionCheck === "pro"}
                             onChange={() => setAttentionCheck("pro")}
                             />
-                            <p>pro-AI</p>
+                            <p>Pro-AI</p>
                         </div>
                         <div className="likert-item" key={"anti"}>
                             <input
@@ -210,7 +210,7 @@ function PostSurvey({ studyState }) {
                             checked={attentionCheck === "anti"}
                             onChange={() => setAttentionCheck("anti")}
                             />
-                            <p>anti-AI</p>
+                            <p>Anti-AI</p>
                         </div>
 
                     </div>
@@ -231,11 +231,11 @@ function PostSurvey({ studyState }) {
                             <input
                             type="radio"
                             name="attentionCheckPrime"
-                            value="Encourage you to share your position openly"
-                            checked={attentionCheckPrime === "Encourage you to share your position openly"}
-                            onChange={() => setAttentionCheckPrime("Encourage you to share your position openly")}
+                            value="Share your position openly"
+                            checked={attentionCheckPrime === "Share your position openly"}
+                            onChange={() => setAttentionCheckPrime("Share your position openly")}
                             />
-                            <p>Encourage you to share your position openly</p>
+                            <p>Share your position openly</p>
                         </div>
 
                     </div>
