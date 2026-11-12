@@ -10,6 +10,8 @@ function PostSurveyBelievability() {
     const state = useLocation();
     const {username, uID, insertedID} = state.state;
 
+    const believable = ["Not believable at all", "A little believable", "Somewhat believable", "Moderately believable", "Decently believable", "Very believable", "Extremely believable"]
+
     const on_button_clicked = async () => {
         if (!believabilityScore) {
             setErrorMessage("Please ensure you've responded to all questions on the page.");
@@ -18,7 +20,7 @@ function PostSurveyBelievability() {
         else {
             const ok = await save();
             if (ok){
-                navigate("/exit", {replace: true, state: {username, uID}});
+                navigate("/exit", {replace: true, state: {username, uID, insertedID}});
             }
         }
     }
@@ -55,7 +57,7 @@ function PostSurveyBelievability() {
             <div className="box">
                 <h1>Debriefing (3/3)</h1>
                 <div className="box-internal">
-                    <p>On a scale from 1-7, where 1 = “Not believable at all” and 7 = “Extremely believable”, how believable did you find the university’s proposal?</p>
+                    <p>On a scale from 1-7, where 1 = “Not believable at all” and 7 = “Extremely believable”, how believable did you find the university system’s proposal?</p>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;
@@ -69,6 +71,7 @@ function PostSurveyBelievability() {
                                 onChange={() => setBelievabilityScore(value)}
                                 />
                                 <p>{value}</p>
+                                <p>{believable[value - 1]}</p>
                             </div>
                             );
                         })}

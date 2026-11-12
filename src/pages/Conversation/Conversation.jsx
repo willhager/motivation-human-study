@@ -46,6 +46,18 @@ function Conversation( { studyState } ) {
     const minutes = Math.floor(secondsLeft / 60);
     const seconds = secondsLeft % 60;
 
+    const policy = studyState.policy;
+
+    let policyText = ""
+    switch (policy) {
+        case "pro":
+            policyText = "Currently, your state university system is considering adopting a policy that would allow for use of generative AI, particularly for experimentation in their coursework.";
+            break;
+        case "anti":
+            policyText = "Currently, your state university system is considering adopting a policy that would ban the use of generative AI related to all coursework.";
+            break;
+    }
+
     //db pull
     const fetchConversation = async () => {
         try {
@@ -190,9 +202,21 @@ function Conversation( { studyState } ) {
     const stripEmojis = (str) => str.replace(emojiRegex, "");
 
 
+    const condition = studyState.condition;
+    let conditionText = ""
+    switch (condition) {
+        case "directional":
+            conditionText = "We would like to reemphasize that we are interested in student opinions, and encourage you to share your position openly during the conversation.";
+            break;
+        case "accuracy":
+            conditionText = "We would like to reemphasize that you keep an open mind about the policy during the conversation.";
+            break;
+    }
+
     return (
         <div className="page">
             <h1>Discussion of AI Policy</h1>
+            <p>With the rapid pace of advancement in the artificial intelligence (AI) field, your state university system is currently considering whether or not to create policy and regulation around the use of AI in the classroom. {policyText} Please discuss the policy you were shown with others. {conditionText}</p>
             <div className="header-absolute">
                 <div className="time-remaining-box">
                     <h3>Timer: {minutes}:{String(seconds).padStart(2, "0")} remaining</h3>
@@ -249,7 +273,7 @@ function Conversation( { studyState } ) {
                         <button className="conversation-next-button" onClick={() => send_update(userResponse)}>Send</button>
                     </div>
                 </div>
-                <button className="next-button" onClick={() => setInstructionPopup(true)}>View Instructions</button>
+                <button className="next-button" onClick={() => setInstructionPopup(true)}>View Full Instructions</button>
                 {instructionPopup && <InstructionPopup studyState = {studyState} onClose={() => setInstructionPopup(false)}></InstructionPopup>}
             </div>
         </div>

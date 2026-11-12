@@ -53,7 +53,7 @@ function PostSurveyOpen2({studyState}) {
             <div className="box">
                 <h1>Debriefing (2/3)</h1>
                 <div className="box-internal">
-                    <p>Next, did you find anything unusual about the university’s proposed AI policy when you first read about it?</p>
+                    <p>Next, did you find anything unusual about the university system’s proposed AI policy when you first read about it?</p>
                     <textarea rows={4} maxLength={1500} required onChange={e => setSuspicion(e.target.value)}></textarea>
                     <button className="next-button" onClick={on_button_clicked}>{buttonText}</button>
                     <h2 className="error-message">{errorMessage}</h2>
