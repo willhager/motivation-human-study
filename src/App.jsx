@@ -16,7 +16,7 @@ import Debrief from "./pages/Debrief/Debrief"
 import InConversation from "./pages/InConversation/InConversation";
 
 import "./App.css";
-import InDemographic from "./pages/inDemographic/InDemographic";
+import InDemographic from "./pages/InDemographic/InDemographic";
 import CompletedRegistration from "./pages/CompletedRegistration/CompletedRegistration";
 
 function AppRoutes() {
