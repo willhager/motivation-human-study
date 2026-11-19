@@ -59,6 +59,7 @@ function PostSurvey({ studyState }) {
                     policyOpinion,
                     partnerCredibility,
                     attentionCheck,
+                    attentionCheckPrime,
                     secondsTyping,
                     secondsReading,
                     timestamp: new Date().toISOString(),
