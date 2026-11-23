@@ -48,7 +48,7 @@ function PolicyMessaging({studyState}) {
         const timer = setTimeout(() => {
             hadTime()
             navigate("/conversationbrief", { replace: true, state: { username, uID, insertedID } });
-        }, 1 * 60 * 1000);
+        }, 1 * 120 * 1000);
 
         return () => clearTimeout(timer);
     }, [navigate, username, uID]);

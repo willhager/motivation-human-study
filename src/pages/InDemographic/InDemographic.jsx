@@ -19,7 +19,7 @@ function InDemographic( { studyState }) {
 
     const [buttonText, setButtonText] = useState("Continue")
 
-    const likerts_opinion = ["1. Strongly Disagree", "2. Moderately Disagree", "3. Slightly Disagree", "4. Neither Agree nor Disagree", "5. Slightly Agree", "6. Moderately Agree", "7. Strongly Agree"];
+    const likerts_opinion = ["1. Extremely Negative", "2. Moderately Negative", "3. Slightly Negative", "4. Neutral", "5. Slightly Positive", "6. Moderately Positive", "7. Extremely Positive"];
     const ai_knowledge_options = ["Not knowledgeable at all", "A little knowledgeable", "Somewhat knowledgeable", "Moderately knowledgeable", "Decently knowledgeable", "Very knowledgeable", "Expertly knowledgeable"]
     const age_options = ["18-24", "25-34", "35-44", "45-54", "55-64", "65+"]
     const gender_options = ["Female", "Male", "Non-Binary", "Prefer not to answer"]
@@ -225,7 +225,7 @@ function InDemographic( { studyState }) {
                     <br></br>
 
                     <h3 className="row-centered">Generative AI Questions</h3>
-                    <h4>On a scale from 1-7, where 1 = “Strongly Disagree” and 7 = “Strongly Agree”, what is your current stance towards generative AI, generally?</h4>
+                    <h4>What is your current stance towards generative AI, generally?</h4>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;
@@ -245,7 +245,7 @@ function InDemographic( { studyState }) {
                     </div>
                     <br></br>
 
-                    <h4>On a scale from 1-7, where 1 = “Strongly Disagree” and 7 = “Strongly Agree”, what is your current stance towards generative AI, specifically in a University setting?</h4>
+                    <h4>What is your current stance towards generative AI, specifically in a University setting?</h4>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;
@@ -265,7 +265,7 @@ function InDemographic( { studyState }) {
                     </div>
                     <br></br>
 
-                    <h4>On a scale from 1-7, where 1 = “Not knowledgeable” and 7 = “Expertly knowledgeable”, how knowledgeable are you about generative AI usage?</h4>
+                    <h4>How knowledgeable are you about generative AI usage?</h4>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;

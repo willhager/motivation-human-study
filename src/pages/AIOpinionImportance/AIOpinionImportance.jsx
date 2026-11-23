@@ -62,7 +62,7 @@ function AIOpinionImportance({ studyState }) {
             <div className="box">
                 <h1>Importance of Opinion on AI Usage</h1>
                 <div className="box-internal">
-                    <p>On a scale from 1-7, where 1 = “Not important at all” and 7 = “Extremely important”, how important is your opinion on AI usage to you?</p>
+                    <p>How important is your opinion on AI usage to you?</p>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;

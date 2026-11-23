@@ -48,7 +48,7 @@ function ConversationalSetup({studyState}) {
         const timer = setTimeout(() => {
             hadTime()
             navigate("/conversation", { replace: true, state: { username, uID } });
-        }, 1 * 60 * 1000);
+        }, 1 * 120 * 1000);
 
         return () => clearTimeout(timer);
     }, [navigate, username, uID]);
@@ -59,8 +59,16 @@ function ConversationalSetup({studyState}) {
             <div className="box">
                 <h1>Discussion of AI Policy</h1>
                 <div className="box-internal">
-                    <p>You will now interact with other students virtually regarding the policy you just received. Both you and the others student saw the same policy. Please do not include any personally identifiable information (PII) such as names, emails, etc. in your conversations. Please provide at least 5 responses to the conversation to receive payment. Please take 10 minutes to discuss the topic and the topic only. While the topic covers generative AI, the study is interested in the true opinions of students, so please write your own responses. Failure to comply with staying on topic and using AI will result in a lack of payment. </p>
-                    <p>Feel free to use the next minute to find outside information to support the conversation. Again, we would like to emphasize that if you use outside information that it be from human written opinions or articles (and not AI generated summaries of information).</p>
+                    <p>You will now interact with other students virtually regarding the policy you just received. Both you and the other students saw the same policy. Please take 10 minutes to discuss the topic and the topic only.</p>
+                    <ul>
+                        <li> Do not include any personally identifiable information (PII) such as names, emails, etc. in your conversations. </li>
+                        <li> Provide at least 5 responses to the conversation to receive payment. </li>
+                        <li> While the topic covers generative AI, the study is interested in the true opinions of students, so please write your own responses. Failure to comply with staying on topic and using AI will result in a lack of payment.</li>
+                        <li> Feel free to use the next minute to find outside information to support the conversation. </li>
+                        <li> If you use outside information, select sources written by other humans (and not AI generated summaries, such as Google AI Overviews). </li>
+                    </ul>
+                    {/* <p>You will now interact with other students virtually regarding the policy you just received. Both you and the others student saw the same policy. Please do not include any personally identifiable information (PII) such as names, emails, etc. in your conversations. Please provide at least 5 responses to the conversation to receive payment. Please take 10 minutes to discuss the topic and the topic only. While the topic covers generative AI, the study is interested in the true opinions of students, so please write your own responses. Failure to comply with staying on topic and using AI will result in a lack of payment. </p> */}
+                    {/* <p>Feel free to use the next minute to find outside information to support the conversation. Again, we would like to emphasize that if you use outside information that it be from human written opinions or articles (and not AI generated summaries of information).</p> */}
                 </div>
                 <div className="box-internal">
                     <p>{conditionText}</p>

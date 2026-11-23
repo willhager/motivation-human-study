@@ -15,6 +15,7 @@ export const handler = async (event) => {
   try {
     const client = await getClientPromise();
     const collection = client.db("internaltesting").collection("state");
+    
 
     if (method === "GET") {
       const state = await collection.findOne({ _id: STATE_ID });

@@ -57,7 +57,7 @@ function PostSurveyBelievability() {
             <div className="box">
                 <h1>Debriefing (3/3)</h1>
                 <div className="box-internal">
-                    <p>On a scale from 1-7, where 1 = “Not believable at all” and 7 = “Extremely believable”, how believable did you find the university system’s proposal?</p>
+                    <p>How believable did you find the university system’s proposal?</p>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;

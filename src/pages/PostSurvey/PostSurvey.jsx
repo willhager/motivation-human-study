@@ -86,7 +86,7 @@ function PostSurvey({ studyState }) {
                 <h1>Post Conversation Survey</h1>
                 <div className="box-internal">
 
-                    <p>On a scale from 1-7, where 1 = “Strongly Disagree” and 7 = “Strongly Agree”, what is your current stance towards generative AI, generally?</p>
+                    <p>What is your current stance towards generative AI, generally?</p>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;
@@ -107,7 +107,7 @@ function PostSurvey({ studyState }) {
                     </div>
                     <br></br>
 
-                    <p>On a scale from 1-7, where 1 = “Strongly Disagree” and 7 = “Strongly Agree”, what is your current stance towards generative AI, specifically in a University setting?</p>
+                    <p>What is your current stance towards generative AI, specifically in a University setting?</p>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;
@@ -128,7 +128,7 @@ function PostSurvey({ studyState }) {
                     </div>
                     <br></br>
 
-                    <p>On a scale from 1-7, where 1 = “No knowledge” and 7 = “Expert knowledge”, how knowledgeable are you about generative AI usage?</p>
+                    <p>How knowledgeable are you about generative AI usage?</p>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;
@@ -149,7 +149,7 @@ function PostSurvey({ studyState }) {
                     </div>
                     <br></br>
 
-                    <p>On a scale from 1-7, where 1 = “Strongly Oppose” and 7 = “Strongly Support”, what is your stance on the AI policy your university system is considering?</p>
+                    <p>What is your stance on the AI policy your university system is considering?</p>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;
@@ -170,7 +170,7 @@ function PostSurvey({ studyState }) {
                     </div>
                     <br></br>
 
-                    <p>On a scale from 1-7, where 1 = “Not credible at all” and 7 = “Extremely credible”, how credible did the individual with whom you conversed seem in your opinion?</p>
+                    <p>How credible did the individual with whom you conversed seem in your opinion?</p>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;

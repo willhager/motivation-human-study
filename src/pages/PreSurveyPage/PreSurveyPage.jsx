@@ -26,6 +26,8 @@ function PreSurveyPage( { studyState }) {
     }, [studyState.inDemographic]);
     
     const on_button_click = async () => {
+        console.log("study state" + studyState.id)
+        console.log(JSON.stringify(studyState))
         setButtonText("Loading...");
         if (!prolificID || !username) {
             setErrorMessage("Missing Prolific ID or username. Please input these values before continuing.");
@@ -78,7 +80,7 @@ function PreSurveyPage( { studyState }) {
                     prolificID,
                     username,
                     studyID,
-                    consented,
+                    consent: {"capture_consent_procedures": consented, "consent_procedures_at": new Date().toISOString()},
                     timestamp: new Date().toISOString(),
                 }),
             });
@@ -179,9 +181,9 @@ function PreSurveyPage( { studyState }) {
 
                 <div className="box-internal">
                     <h2>Consent document:</h2>
-                    <object className="consent-embedding" data={"/consent_form.docx.pdf"} type="application/pdf">
+                    <object className="consent-embedding" data={"/consent_to_procedures.pdf"} type="application/pdf">
                         <p>
-                            Your browser can't display PDFs. <a href={"/consent_form.docx.pdf"}>Download it instead</a>.
+                            Your browser can't display PDFs. <a href={"/consent_to_procedures.pdf"}>Download it instead</a>.
                         </p>
                     </object>
                     <div className="row-centered">

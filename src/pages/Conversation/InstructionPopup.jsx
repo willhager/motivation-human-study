@@ -39,8 +39,15 @@ function InstructionPopup({ studyState, onClose }){
                 </button>
                 <p>With the rapid pace of advancement in the artificial intelligence (AI) field, your state university system is currently considering whether or not to create policy and regulation around the use of AI in the classroom. Given this policy will take effect at the university level, they are interested in learning about the student population’s stance on AI use in the classroom. More importantly, your state university system has partnered with the Computer Science department at the University of Rochester to administer surveys and discussions about the proposed policy and its persuasiveness.</p>
                 <p>{policyText}</p>
-                <p>You will now interact with other students virtually regarding the policy you just received. Both you and the other students saw the same policy. Please do not include any personally identifiable information (PII) such as names, emails, etc. in your conversations. Please provide at least 5 responses to the conversation to receive payment. Please take 10 minutes to discuss the topic and the topic only. While the topic covers generative AI, the study is interested in the true opinions of students, so please write your own responses. Failure to comply with staying on topic and using AI will result in a lack of payment.</p>
-                <p>Additionally, feel free to open additional tabs to find outside information to support the conversation. Again, we would like to emphasize that if you use outside information that it be from human written opinions or articles (and not AI generated summaries of information).</p>
+                <p>You will now interact with other students virtually regarding the policy you just received. Both you and the other students saw the same policy. Please take 10 minutes to discuss the topic and the topic only.</p>
+                <ul>     
+                        <li> Do not include any personally identifiable information (PII) such as names, emails, etc. in your conversations. </li>
+                        <li> Provide at least 5 responses to the conversation to receive payment. </li>
+                        <li> While the topic covers generative AI, the study is interested in the true opinions of students, so please write your own responses. Failure to comply with staying on topic and using AI will result in a lack of payment.</li>
+                        <li> Feel free to use the next minute to find outside information to support the conversation. </li>
+                        <li> If you use outside information, select sources written by other humans (and not AI generated summaries, such as Google AI Overviews). </li>
+                </ul>
+                <p>Additionally, feel free to open additional tabs to find outside information to support the conversation.</p>
             </div>
         </div>
     );
