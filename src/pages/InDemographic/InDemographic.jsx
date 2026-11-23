@@ -206,7 +206,7 @@ function InDemographic( { studyState }) {
                     <br></br>
                     <h4 className="centered-no-margin">Strength of Political Affiliation</h4>
                     <div className="row-centered">
-                        {Array.from({ length: 4 }, (_, i) => {
+                        {Array.from({ length: 5 }, (_, i) => {
                             const value = i + 1;
                             return (
                             <div className="likert-item" key={value}>
@@ -265,7 +265,7 @@ function InDemographic( { studyState }) {
                     </div>
                     <br></br>
 
-                    <h4>On a scale from 1-7, where 1 = “No knowledge” and 7 = “Expert knowledge”, how knowledgeable are you about generative AI usage?</h4>
+                    <h4>On a scale from 1-7, where 1 = “Not knowledgeable” and 7 = “Expertly knowledgeable”, how knowledgeable are you about generative AI usage?</h4>
                     <div className="row-centered">
                         {Array.from({ length: 7 }, (_, i) => {
                             const value = i + 1;

@@ -7,14 +7,14 @@ const sendJson = (statusCode, body) => ({
   body: JSON.stringify(body),
 });
 
-const STATE_ID = new ObjectId("6ad678f761b961446f4150af");
+const STATE_ID = new ObjectId("6b037ad7c8b3c6dc85af95d0");
 
 export const handler = async (event) => {
   const method = event.httpMethod;
 
   try {
     const client = await getClientPromise();
-    const collection = client.db("human_study_website").collection("state");
+    const collection = client.db("internaltesting").collection("state");
 
     if (method === "GET") {
       const state = await collection.findOne({ _id: STATE_ID });
