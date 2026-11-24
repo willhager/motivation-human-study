@@ -70,7 +70,7 @@ function PostSurveyBelievability() {
                                 checked={believabilityScore === value}
                                 onChange={() => setBelievabilityScore(value)}
                                 />
-                                <p>{value}</p>
+                                {/* <p>{value}</p> */}
                                 <p>{believable[value - 1]}</p>
                             </div>
                             );

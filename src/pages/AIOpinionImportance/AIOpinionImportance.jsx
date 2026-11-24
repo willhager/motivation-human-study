@@ -75,7 +75,7 @@ function AIOpinionImportance({ studyState }) {
                                 checked={opinionStrength === value}
                                 onChange={() => setopinionStrength(value)}
                                 />
-                                <p>{value}</p>
+                                {/* <p>{value}</p> */}
                                 <p>{likert_values[value - 1]}</p>
                             </div>
                             );

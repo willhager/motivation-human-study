@@ -18,8 +18,9 @@ function PostSurvey({ studyState }) {
     const state = useLocation();
     const {username, uID, secondsTyping, secondsReading} = state.state;
 
+    const likerts_opinion = ["Extremely Negative", "Moderately Negative", "Slightly Negative", "Neutral", "Slightly Positive", "Moderately Positive", "Extremely Positive"];
     const likerts_support = ["Strongly Oppose", "Moderately Oppose", "Slightly Oppose", "Neither Oppose nor Support", "Slightly Support", "Moderately Support", "Strongly Support"];
-    const likerts_opinion = ["Strongly Disagree", "Moderately Disagree", "Slightly Disagree", "Neither Agree nor Disagree", "Slightly Agree", "Moderately Agree", "Strongly Agree"];
+    // const likerts_opinion = ["Strongly Disagree", "Moderately Disagree", "Slightly Disagree", "Neither Agree nor Disagree", "Slightly Agree", "Moderately Agree", "Strongly Agree"];
     const ai_knowledge_options = ["Not knowledgeable at all", "A little knowledgeable", "Somewhat knowledgeable", "Moderately knowledgeable", "Decently knowledgeable", "Very knowledgeable", "Expertly knowledgeable"]
     const partner_credibility = ["Not credible at all", "A little credible", "Somewhat credible", "Moderately credible", "Decently credible", "Very credible", "Extremely credible"]
 
@@ -99,7 +100,7 @@ function PostSurvey({ studyState }) {
                                 checked={generalAIAttitude === value}
                                 onChange={() => setGeneralAIAttitude(value)}
                                 />
-                                <p>{value}</p>
+                                {/* <p>{value}</p> */}
                                 <p>{likerts_opinion[value - 1]}</p>
                             </div>
                             );
@@ -120,7 +121,7 @@ function PostSurvey({ studyState }) {
                                 checked={classroomAIAttitude === value}
                                 onChange={() => setClassroomAIAttitude(value)}
                                 />
-                                <p>{value}</p>
+                                {/* <p>{value}</p> */}
                                 <p>{likerts_opinion[value - 1]}</p>
                             </div>
                             );
@@ -141,7 +142,7 @@ function PostSurvey({ studyState }) {
                                 checked={initialKnowledge === value}
                                 onChange={() => setInitialKnowledge(value)}
                                 />
-                                <p>{value}</p>
+                                {/* <p>{value}</p> */}
                                 <p>{ai_knowledge_options[value-1]}</p>
                             </div>
                             );
@@ -162,7 +163,7 @@ function PostSurvey({ studyState }) {
                                 checked={policyOpinion === value}
                                 onChange={() => setPolicyOpinion(value)}
                                 />
-                                <p>{value}</p>
+                                {/* <p>{value}</p> */}
                                 <p>{likerts_support[value-1]}</p>
                             </div>
                             );
@@ -183,7 +184,7 @@ function PostSurvey({ studyState }) {
                                 checked={partnerCredibility === value}
                                 onChange={() => setPartnerCredibility(value)}
                                 />
-                                <p>{value}</p>
+                                {/* <p>{value}</p> */}
                                 <p>{partner_credibility[value-1]}</p>
                             </div>
                             );

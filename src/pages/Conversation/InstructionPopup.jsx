@@ -44,7 +44,7 @@ function InstructionPopup({ studyState, onClose }){
                         <li> Do not include any personally identifiable information (PII) such as names, emails, etc. in your conversations. </li>
                         <li> Provide at least 5 responses to the conversation to receive payment. </li>
                         <li> While the topic covers generative AI, the study is interested in the true opinions of students, so please write your own responses. Failure to comply with staying on topic and using AI will result in a lack of payment.</li>
-                        <li> Feel free to use the next minute to find outside information to support the conversation. </li>
+                        <li> Feel free to use time to find outside information to support the conversation. </li>
                         <li> If you use outside information, select sources written by other humans (and not AI generated summaries, such as Google AI Overviews). </li>
                 </ul>
                 <p>Additionally, feel free to open additional tabs to find outside information to support the conversation.</p>
