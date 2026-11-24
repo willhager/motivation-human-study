@@ -23,6 +23,7 @@ function PostSurveyOpen2({studyState}) {
 
     const save = async () => {
         setButtonText("Loading...");
+        document.getElementById("next-button").disabled = true;
         try {
             const res = await fetch(`/.netlify/functions/post_survey?id=${insertedID}`, {
                 method: "PATCH",
@@ -42,9 +43,12 @@ function PostSurveyOpen2({studyState}) {
         } catch (err) {
             console.error(err);
             setErrorText("Something went wrong saving your information. Please try again.");
+            document.getElementById("next-button").disabled = false;
+            setButtonText("Continue");
             return false;
         } finally {
             setButtonText("Continue");
+            document.getElementById("next-button").disabled = false;
         }
     }
 
@@ -55,7 +59,7 @@ function PostSurveyOpen2({studyState}) {
                 <div className="box-internal">
                     <p>Next, did you find anything unusual about the university system’s proposed AI policy when you first read about it?</p>
                     <textarea rows={4} maxLength={1500} required onChange={e => setSuspicion(e.target.value)}></textarea>
-                    <button className="next-button" onClick={on_button_clicked}>{buttonText}</button>
+                    <button className="next-button" id="next-button" onClick={on_button_clicked}>{buttonText}</button>
                     <h2 className="error-message">{errorMessage}</h2>
                 </div>
             </div>

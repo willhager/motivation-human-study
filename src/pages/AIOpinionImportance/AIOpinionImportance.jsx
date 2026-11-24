@@ -32,6 +32,7 @@ function AIOpinionImportance({ studyState }) {
 
     const save = async () => {
         setButtonText("Loading...");
+        document.getElementById("next-button").disabled = true;
         try {
             const res = await fetch(`/.netlify/functions/primes?id=${insertedID}`, {
                 method: "PATCH",
@@ -51,9 +52,11 @@ function AIOpinionImportance({ studyState }) {
         } catch (err) {
             console.error(err);
             setErrorMessage("Something went wrong saving your information. Please try again.");
+            document.getElementById("next-button").disabled = false;
             return false;
         } finally {
             setButtonText("Continue");
+            document.getElementById("next-button").disabled = false;
         }
     }
 
@@ -81,7 +84,7 @@ function AIOpinionImportance({ studyState }) {
                             );
                         })}
                     </div>
-                    <button className="next-button" onClick={on_button_clicked}>{buttonText}</button>
+                    <button className="next-button" id="next-button" onClick={on_button_clicked}>{buttonText}</button>
                     <h2 className="error-message">{errorMessage}</h2>
                 </div>
             </div>

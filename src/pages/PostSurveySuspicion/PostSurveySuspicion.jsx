@@ -20,13 +20,14 @@ function PostSurveyBelievability() {
         else {
             const ok = await save();
             if (ok){
-                navigate("/exit", {replace: true, state: {username, uID, insertedID}});
+                navigate("/debrief4", {replace: true, state: {username, uID, insertedID}});
             }
         }
     }
 
     const save = async () => {
         setButtonText("Loading...");
+        document.getElementById("next-button").disabled = true;
         try {
             const res = await fetch(`/.netlify/functions/post_survey?id=${insertedID}`, {
                 method: "PATCH",
@@ -46,9 +47,12 @@ function PostSurveyBelievability() {
         } catch (err) {
             console.error(err);
             setErrorMessage("Something went wrong saving your information. Please try again.");
+            document.getElementById("next-button").disabled = false;
+            setButtonText("Continue");
             return false;
         } finally {
             setButtonText("Continue");
+            document.getElementById("next-button").disabled = false;
         }
     }
 
@@ -76,7 +80,7 @@ function PostSurveyBelievability() {
                             );
                         })}
                     </div>
-                    <button className="next-button" onClick={on_button_clicked}>{buttonText}</button>
+                    <button className="next-button" id="next-button" onClick={on_button_clicked}>{buttonText}</button>
                     <h2 className="error-message">{errorMessage}</h2>
                 </div>
             </div>

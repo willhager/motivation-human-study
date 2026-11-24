@@ -10,6 +10,7 @@ function InDemographic( { studyState }) {
     const [gender, setGender] = useState(null);
     const [race, setRace] = useState(null);
     const [edu, setEdu] = useState(null);
+    const [eduEnrollment, setEduEnrollment] = useState(null);
     const [eduBackground, setEduBackground] = useState(null);
     const [pol, setPol] = useState(null);
     const [polstr, setPolStr] = useState(null);
@@ -33,7 +34,7 @@ function InDemographic( { studyState }) {
     const navigate = useNavigate();
 
     const on_button_click = async () => {
-        if (!prolificID || !age || !gender || !race || !edu || !eduBackground || !pol || !polstr || !generalAIAttitude || !classroomAIAttitude || !initialKnowledge) {
+        if (!prolificID || !age || !gender || !race || !edu || !eduEnrollment || !eduBackground || !pol || !polstr || !generalAIAttitude || !classroomAIAttitude || !initialKnowledge) {
             setErrorMessage("Please fill out all information to receive code.");
             return;
         }
@@ -67,6 +68,7 @@ function InDemographic( { studyState }) {
                     race: userRace,
                     edu: userEdu, 
                     eduBackground,
+                    eduEnrollment,
                     pol: userPol,
                     polstr: userPolStr,
                     generalAIAttitude,
@@ -181,6 +183,32 @@ function InDemographic( { studyState }) {
                         })}
                     </div>
                     <br></br>
+
+                    <h4 className="centered-no-margin">Are you currently enrolled at a college/university?</h4>
+                    <div className="row-centered">
+                        <div className="likert-item" key={"yes"}>
+                            <input
+                            type="radio"
+                            name="eduEnrollment"
+                            value="yes"
+                            checked={eduEnrollment === "yes"}
+                            onChange={() => setEduEnrollment("yes")}
+                            />
+                            <p>Yes</p>
+                        </div>
+                        <div className="likert-item" key={"no"}>
+                            <input
+                            type="radio"
+                            name="eduEnrollment"
+                            value="no"
+                            checked={eduEnrollment === "no"}
+                            onChange={() => setEduEnrollment("no")}
+                            />
+                            <p>No</p>
+                        </div>
+                    </div>
+                    <br></br>
+
                     <div className="row-centered">
                         <h3>Please enter your major:</h3>
                         <input className="input-short" type="text" required  onChange={e => setEduBackground(e.target.value)}></input>
