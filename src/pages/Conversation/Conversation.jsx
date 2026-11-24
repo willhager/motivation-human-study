@@ -146,7 +146,6 @@ function Conversation( { studyState } ) {
             const elapsed = readingStartRef.current ? (Date.now() - readingStartRef.current) / 1000 : 0;
             readingStartRef.current = null;
             secondsReadingRef.current.push(elapsed);
-            console.log(secondsReadingRef);
         }
         if (typingStartRef.current === null){
             typingStartRef.current = Date.now();
@@ -196,8 +195,7 @@ function Conversation( { studyState } ) {
     let colorByUser = {uID: "green"};
     const colors = ["orange", "yellow", "blue", "red", "purple", "brown"];
 
-    const emojiRegex =
-        /[\p{Extended_Pictographic}\p{Emoji_Modifier}\u{1F1E6}-\u{1F1FF}\u{E0020}-\u{E007F}\u200D\uFE0F\u20E3]/gu;
+    const emojiRegex = /[\p{Extended_Pictographic}\p{Emoji_Modifier}\u{1F1E6}-\u{1F1FF}\u{E0020}-\u{E007F}\u200D\uFE0F\u20E3]/gu;
 
     const stripEmojis = (str) => str.replace(emojiRegex, "");
 

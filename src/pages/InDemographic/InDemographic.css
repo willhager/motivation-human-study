@@ -18,3 +18,7 @@
     margin: 0px;
     margin-top: 8px;
 }
+
+.likert-item p {
+    font-size: .85em;
+}
