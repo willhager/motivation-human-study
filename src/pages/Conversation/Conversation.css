@@ -1,10 +1,17 @@
+.conversation-page {
+    margin-top: 0.5rem;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .conversation-item {
     background-color: lightblue;
     border: 2px solid blue;
     border-radius: 8px;
     align-self: start;
-    padding: 10px 20px;
-    margin: 5px 20px;
+    padding: 5px 8px;
+    margin: 2px 5px;
     min-width: 30%;
 }
 
@@ -62,6 +69,16 @@
     padding: 0;
 }
 
+.conversation-item-row {
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
+}
+
+.conversation-item-row.green{
+    align-self: end;
+}
+
 .conversation-item-header-row h4{
     padding: 0;
     margin-top: 5px;
@@ -85,13 +102,37 @@
   display: flex;
   flex-direction: column;
   border-radius: 16px;
-  margin: 20px 0px 20px 0px;;
+  margin: 0px 0px 20px 0px;;
   color: var(--main-contrast);
   border: 2px dashed var(--main-contrast);
   background-color: white;
   padding: 30px;
   box-sizing: border-box;
-  height: 65vh;
+  height: 95vh;
+}
+
+.conversation-box {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  color: var(--main-contrast);
+  padding: 30px 30px 0px 30px;;
+  padding-top: 20px;
+  box-sizing: border-box;
+  flex: 7 1 0;
+}
+
+
+.two-column {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 0;
+  width: 100%;
+}
+
+.conversation-description {
+    flex: 3 1 0;
 }
 
 .conversation {
@@ -143,6 +184,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.header-absolute-right-offset {
+    display: flex;
+    position: fixed;
+    left: 35%;;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 25px;
+
 }
 
 .time-remaining-box{
@@ -221,7 +275,7 @@ body.no-scroll {
   border-radius: 8px;
   border: 2px solid black;
   position: relative;
-  text-align: center;
+  text-align: left;
   color: black;
   transform: scale(0.9);
   opacity: 0;

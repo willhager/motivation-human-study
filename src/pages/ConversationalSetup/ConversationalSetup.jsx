@@ -85,7 +85,7 @@ function ConversationalSetup({studyState}) {
     return (
         <div className="page">
             <div className="box">
-                <div className="header-absolute">
+                <div className="header-absolute-right-offset">
                     <div className="time-remaining-box">
                         <h3>Conversation begins in: {minutes}:{String(seconds).padStart(2, "0")}</h3>
                     </div>

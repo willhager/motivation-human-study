@@ -186,7 +186,7 @@ function Conversation( { studyState } ) {
     useEffect(() => {
         if (secondsLeft <= 0) {
             localStorage.removeItem(`deadline-${uID}`);
-            navigate("/postconversation", { replace: true, state: { username, uID, secondsTyping : secondsTypingRef.current, secondsReading: secondsReadingRef.current} });
+            //navigate("/postconversation", { replace: true, state: { username, uID, secondsTyping : secondsTypingRef.current, secondsReading: secondsReadingRef.current} });
         }
     }, [secondsLeft, navigate, username, uID]);
 
@@ -212,67 +212,76 @@ function Conversation( { studyState } ) {
     }
 
     return (
-        <div className="page">
-            <h1>Discussion of AI Policy</h1>
-            <p>With the rapid pace of advancement in the artificial intelligence (AI) field, your state university system is currently considering whether or not to create policy and regulation around the use of AI in the classroom. {policyText} Please discuss the policy you were shown with others. {conditionText}</p>
-            <div className="header-absolute">
+        <div className="conversation-page">
+            <div className="header-absolute-right-offset">
                 <div className="time-remaining-box">
                     <h3>Timer: {minutes}:{String(seconds).padStart(2, "0")} remaining</h3>
                 </div>
             </div>
-            <div className="box">
-                <div className="conversation-box-internal">
-                    <div className="conversation">
-                        {conversation.map((item, index) => {
-                        let color = "";
-                        if (item.uID !== uID && !(item.uID in colorByUser)) {
-                            colorByUser[item.uID] = colors[next % colors.length];
-                            next++;
-                        }
-                        color = item.uID === uID ? "green" : colorByUser[item.uID];
-                        return (
-                            <section id={item.messageId} key={item.messageId}>
-                                <div className={`conversation-item ${color}`}>
-                                    <div className="conversation-item-header-row">
-                                        <h4>{item.username}</h4>
-                                        <h4>{new Date(item.timestamp).toLocaleString("en-US", {
-                                            month: "2-digit",
-                                            day: "2-digit",
-                                            year: "numeric",
-                                            hour: "2-digit",
-                                            minute: "2-digit",
-                                            hour12: false,
-                                            })}</h4>
-                                    </div>
-                                    {item.replyingTo && <p className="conversation-p-small-no-margin" onClick={() => {
-                                                                                                            const el = document.getElementById(item.replyingTo);
-                                                                                                            if (!el) return;
-                                                                                                            el.scrollIntoView({ behavior: "smooth", block: "center" });
-                                                                                                            el.classList.add("flash");
-                                                                                                            setTimeout(() => el.classList.remove("flash"), 1500);
-                                                                                                        }}>Replying to {item.replyingToName}: {item.replyingToHead}...</p>}
-                                    <p><Linkify text={item.response} /></p>
-                                    {color !== "green" && <button  className="reply-button" onClick={() => {set_replying(item)}}>Reply</button>}
-                                </div>
-                            </section>
-                        )
-                        })}
-                        <div ref={bottomRef} />
-                    </div>
-                    {replyingToName &&
-                        <div className="conversation-replying-to-line-row">
-                            <p className="conversation-replying-to-line">Replying to: {replyingToName}</p>
-                            <button className="replying-to-line-x" onClick={() => set_replying(null)}>X</button>
-                        </div>
-                        
-                    }  
-                    <div className="conversation-row-centered">
-                        <textarea id="user-input" value={userResponse} onChange={e => updateUserResponse(stripEmojis(e.target.value))} onKeyDown={handleKeyDown}/>
-                        <button className="conversation-next-button" onClick={() => send_update(userResponse)}>Send</button>
-                    </div>
+
+
+            <div className="two-column">
+                <div className="conversation-description">
+                    <h1>Discussion of AI Policy</h1>
+                    <p>With the rapid pace of advancement in the artificial intelligence (AI) field, your state university system is currently considering whether or not to create policy and regulation around the use of AI in the classroom. {policyText} Please discuss the policy you were shown with others. {conditionText}</p>
+                    <button className="next-button" onClick={() => setInstructionPopup(true)}>View Full Instructions</button>
                 </div>
-                <button className="next-button" onClick={() => setInstructionPopup(true)}>View Full Instructions</button>
-                {instructionPopup && <InstructionPopup studyState = {studyState} onClose={() => setInstructionPopup(false)}></InstructionPopup>}
+                
+                <div className="conversation-box">
+                    <div className="conversation-box-internal">
+                        <div className="conversation">
+                            {conversation.map((item, index) => {
+                            let color = "";
+                            if (item.uID !== uID && !(item.uID in colorByUser)) {
+                                colorByUser[item.uID] = colors[next % colors.length];
+                                next++;
+                            }
+                            color = item.uID === uID ? "green" : colorByUser[item.uID];
+                            return (
+                                <section id={item.messageId} key={item.messageId}>
+                                    <div className={`conversation-item-row ${color}`}>
+                                        <div className={`conversation-item ${color}`}>
+                                            <div className="conversation-item-header-row">
+                                                <h4>{item.username}</h4>
+                                                <h4>{new Date(item.timestamp).toLocaleString("en-US", {
+                                                    month: "2-digit",
+                                                    day: "2-digit",
+                                                    year: "numeric",
+                                                    hour: "2-digit",
+                                                    minute: "2-digit",
+                                                    hour12: false,
+                                                    })}</h4>
+                                            </div>
+                                            {item.replyingTo && <p className="conversation-p-small-no-margin" onClick={() => {
+                                                                                                                    const el = document.getElementById(item.replyingTo);
+                                                                                                                    if (!el) return;
+                                                                                                                    el.scrollIntoView({ behavior: "smooth", block: "center" });
+                                                                                                                    el.classList.add("flash");
+                                                                                                                    setTimeout(() => el.classList.remove("flash"), 1500);
+                                                                                                                }}>Replying to {item.replyingToName}: {item.replyingToHead}...</p>}
+                                            <p><Linkify text={item.response} /></p>
+                                        </div>
+                                        {color !== "green" && <button  className="reply-button" onClick={() => {set_replying(item)}}>Reply</button>}
+                                    </div>
+                                </section>
+                            )
+                            })}
+                            <div ref={bottomRef} />
+                        </div>
+                        {replyingToName &&
+                            <div className="conversation-replying-to-line-row">
+                                <p className="conversation-replying-to-line">Replying to: {replyingToName}</p>
+                                <button className="replying-to-line-x" onClick={() => set_replying(null)}>X</button>
+                            </div>
+                            
+                        }  
+                        <div className="conversation-row-centered">
+                            <textarea id="user-input" value={userResponse} onChange={e => updateUserResponse(stripEmojis(e.target.value))} onKeyDown={handleKeyDown}/>
+                            <button className="conversation-next-button" onClick={() => send_update(userResponse)}>Send</button>
+                        </div>
+                    </div>
+                    {instructionPopup && <InstructionPopup studyState = {studyState} onClose={() => setInstructionPopup(false)}></InstructionPopup>}
+                </div>
             </div>
         </div>
     )
