@@ -4,6 +4,27 @@ import { useNavigate } from "react-router-dom";
 import CompletedRegistration from "../CompletedRegistration/CompletedRegistration";
 
 import "./InDemographic.css"
+
+function Dropdown({ name, label, options, value, onChange }) {
+  return (
+    <>
+      <label style={{marginRight: 1 + 'em'}} htmlFor={name}>{label}</label>
+      <select
+        id={name}
+        name={name}
+        value={value ?? ""}
+        onChange={(e) => onChange(Number(e.target.value))}
+      >
+        <option value="" disabled>Select...</option>
+        {options.map((text, i) => (
+          <option key={i + 1} value={i + 1}>{text}</option>
+        ))}
+      </select>
+    </>
+  );
+}
+
+
 function InDemographic( { studyState }) {
     const [prolificID, setProlificID] = useState(null);
     const [age, setAge] = useState(null);
@@ -107,110 +128,33 @@ function InDemographic( { studyState }) {
                     </div>
 
                     <div className="row-centered"><h3>Demographic Questions</h3></div>
-                    <h4 className="centered-no-margin">Age</h4>
                     <div className="row-centered">
-                        {Array.from({ length: 6 }, (_, i) => {
-                            const value = i + 1;
-                            return (
-                            <div className="likert-item" key={value}>
-                                <input
-                                type="radio"
-                                name="age"
-                                value={value}
-                                checked={age === value}
-                                onChange={() => setAge(value)}
-                                />
-                                <p>{age_options[value - 1]}</p>
-                            </div>
-                            );
-                        })}
+                        <Dropdown name="age" label="Age:" options={age_options} value={age} onChange={setAge} />
                     </div>
                     <br></br>
-                    <h4 className="centered-no-margin">Gender</h4>
                     <div className="row-centered">
-                        {Array.from({ length: 4 }, (_, i) => {
-                            const value = i + 1;
-                            return (
-                            <div className="likert-item" key={value}>
-                                <input
-                                type="radio"
-                                name="gender"
-                                value={value}
-                                checked={gender === value}
-                                onChange={() => setGender(value)}
-                                />
-                                <p>{gender_options[value - 1]}</p>
-                            </div>
-                            );
-                        })}
+                        <Dropdown name="gender" label="Gender:" options={gender_options} value={gender} onChange={setGender} />
+
                     </div>
                     <br></br>
-                    <h4 className="centered-no-margin">Race</h4>
                     <div className="row-centered">
-                        {Array.from({ length: 6 }, (_, i) => {
-                            const value = i + 1;
-                            return (
-                            <div className="likert-item" key={value}>
-                                <input
-                                type="radio"
-                                name="race"
-                                value={value}
-                                checked={race === value}
-                                onChange={() => setRace(value)}
-                                />
-                                <p>{race_options[value - 1]}</p>
-                            </div>
-                            );
-                        })}
+                        <Dropdown name="race" label="Race:" options={race_options} value={race} onChange={setRace} />
                     </div>
                     <br></br>
-                    <h4 className="centered-no-margin">Education Level</h4>
                     <div className="row-centered">
-                        {Array.from({ length: 5 }, (_, i) => {
-                            const value = i + 1;
-                            return (
-                            <div className="likert-item" key={value}>
-                                <input
-                                type="radio"
-                                name="edu"
-                                value={value}
-                                checked={edu === value}
-                                onChange={() => setEdu(value)}
-                                />
-                                <p>{edu_options[value - 1]}</p>
-                            </div>
-                            );
-                        })}
+                        <Dropdown name="edu" label="Education:" options={edu_options} value={edu} onChange={setEdu} />
                     </div>
+
                     <br></br>
 
-                    <h4 className="centered-no-margin">Are you currently enrolled at a college/university?</h4>
+                    <h4>Are you currently enrolled at a college/university?</h4>
                     <div className="row-centered">
-                        <div className="likert-item" key={"yes"}>
-                            <input
-                            type="radio"
-                            name="eduEnrollment"
-                            value="yes"
-                            checked={eduEnrollment === "yes"}
-                            onChange={() => setEduEnrollment("yes")}
-                            />
-                            <p>Yes</p>
-                        </div>
-                        <div className="likert-item" key={"no"}>
-                            <input
-                            type="radio"
-                            name="eduEnrollment"
-                            value="no"
-                            checked={eduEnrollment === "no"}
-                            onChange={() => setEduEnrollment("no")}
-                            />
-                            <p>No</p>
-                        </div>
+                        <Dropdown name="enrollment" label="Education Enrollment" options={["Yes", "No"]} value={eduEnrollment} onChange={setEduEnrollment} />
                     </div>
                     <br></br>
 
                     <div className="row-centered">
-                        <h3>Please enter your major:</h3>
+                        <h4>Please enter your major:</h4>
                         <input className="input-short" type="text" required  onChange={e => setEduBackground(e.target.value)}></input>
                     </div>
                     <h4 className="centered-no-margin">Political Affiliation</h4>
