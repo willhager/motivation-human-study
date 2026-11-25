@@ -12,7 +12,8 @@ import PostSurvey from "./pages/PostSurvey/PostSurvey";
 import PostSurveyOpen1 from "./pages/PostSurveyOpen1/PostSurveyOpen1";
 import PostSurveyOpen2 from "./pages/PostSurveyOpen2/PostSurveyOpen2";
 import PostSurveySuspicion from "./pages/PostSurveySuspicion/PostSurveySuspicion";
-import Debrief from "./pages/Debrief/Debrief"
+import Debrief from "./pages/Debrief/Debrief";
+import Exit from "./pages/Exit/Exit";
 import InConversation from "./pages/InConversation/InConversation";
 
 import "./App.css";
@@ -62,9 +63,10 @@ function AppRoutes() {
       <Route path="/conversation" element={<Conversation studyState={studyState} />}/>
       <Route path="/postconversation" element={<PostSurvey studyState={studyState} />}/>
       <Route path="/debrief1" element={<PostSurveyOpen1 studyState={studyState}/>}/>
-      {<Route path="/debrief2" element={<PostSurveyOpen2 studyState={studyState}/>}/>}
+      <Route path="/debrief2" element={<PostSurveyOpen2 studyState={studyState}/>}/>
       <Route path="/debrief3" element={<PostSurveySuspicion studyState={studyState}/>}/>
-      <Route path="/exit" element={<Debrief studyState={studyState}/>}/>
+      <Route path="/debrief4" element={<Debrief studyState={studyState}/>}/>
+      <Route path="/exit" element={<Exit studyState={studyState}/>}/>
       <Route path="/inConversation" element={<InConversation />}/>
       <Route path="/inDemographic" element={<InDemographic studyState={studyState}/>}/>
       <Route path="/completedRegistration" element={<CompletedRegistration/>}/>

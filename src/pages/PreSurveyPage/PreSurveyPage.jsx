@@ -183,7 +183,7 @@ function PreSurveyPage( { studyState }) {
                     <h2>Consent document:</h2>
                     <object className="consent-embedding" data={"/consent_to_procedures.pdf"} type="application/pdf">
                         <p>
-                            Your browser can't display PDFs. <a href={"/consent_to_procedures.pdf"}>Download it instead</a>.
+                            There was an error displaying the PDF. <a href={"/consent_to_procedures.pdf"}>Download it instead</a>.
                         </p>
                     </object>
                     <div className="row-centered">

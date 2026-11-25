@@ -47,7 +47,7 @@ export const handler = async (event) => {
         );
         const doc = updated?.value ?? updated;
         if (!doc) return sendJson(404, { error: "State object not found." });
-        return sendJson(200, publicState(doc));
+        return sendJson(200, doc);
       }
 
       if (body.action === "inConversation") {
@@ -63,7 +63,7 @@ export const handler = async (event) => {
         );
         const doc = updated?.value ?? updated;
         if (!doc) return sendJson(404, { error: "State object not found." });
-        return sendJson(200, publicState(doc));
+        return sendJson(200, doc);
       }
 
       return sendJson(400, { error: "Unknown action." });

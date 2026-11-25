@@ -23,6 +23,7 @@ function PostSurveyOpen1({studyState}) {
 
     const save = async () => {
         setButtonText("Loading...");
+        document.getElementById("next-button").disabled = true;
         try {
             const res = await fetch(`/.netlify/functions/post_survey?id=${insertedID}`, {
                 method: "PATCH",
@@ -42,9 +43,12 @@ function PostSurveyOpen1({studyState}) {
         } catch (err) {
             console.error(err);
             setErrorText("Something went wrong saving your information. Please try again.");
+            setButtonText("Continue");
+            document.getElementById("next-button").disabled = false;
             return false;
         } finally {
             setButtonText("Continue");
+            document.getElementById("next-button").disabled = false;
         }
     }
 
@@ -55,7 +59,7 @@ function PostSurveyOpen1({studyState}) {
                 <div className="box-internal">
                     <p>First, please let us know if there are any comments you have about the study or anything you would like to tell us about that you think might have affected your responses to the survey.</p>
                     <textarea rows={4} maxLength={1500} required onChange={e => setComments(e.target.value)}></textarea>
-                    <button className="next-button" onClick={on_button_clicked}>{buttonText}</button>
+                    <button className="next-button" id="next-button" onClick={on_button_clicked}>{buttonText}</button>
                     <h2 className="error-message">{errorMessage}</h2>
                 </div>
             </div>

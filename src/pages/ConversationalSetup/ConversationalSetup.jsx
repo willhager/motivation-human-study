@@ -9,22 +9,25 @@ function ConversationalSetup({studyState}) {
     const {username, uID, insertedID} = state.state;
     const condition = studyState.condition;
 
-    let conditionText = ""
-    switch (condition) {
-        case "directional":
-            conditionText = "We would like to reemphasize that we are interested in student opinions, and encourage you to share your position openly during the conversation.";
-            break;
-        case "accuracy":
-            conditionText = "We would like to reemphasize that you keep an open mind about the policy during the conversation.";
-            break;
-    }
+    const TOTAL_SECONDS = 120;
+    
+    const [deadline] = useState(() => {
+        const key = `deadline-${uID}`;
+        const saved = localStorage.getItem(key);
+        if (saved) {
+            return Number(saved);
+        }
+        const newDeadline = Date.now() + TOTAL_SECONDS * 1000;
+        localStorage.setItem(key, String(newDeadline));
+        return newDeadline;
+    });    
 
-    useEffect(() => {
-        enoughSetupTimeRef.current = enoughSetupTime;
-    }, [enoughSetupTime]);
+    const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
 
-    useEffect(() => {
-        const hadTime = async () => {
+    const minutes = Math.floor(secondsLeft / 60);
+    const seconds = secondsLeft % 60;
+
+    const hadTime = async () => {
             console.log(enoughSetupTime);
             try {
                 const res = await fetch(`/.netlify/functions/primes?id=${insertedID}`, {
@@ -45,18 +48,48 @@ function ConversationalSetup({studyState}) {
                 console.error(err);
             }
         }
-        const timer = setTimeout(() => {
-            hadTime()
-            navigate("/conversation", { replace: true, state: { username, uID } });
-        }, 1 * 120 * 1000);
+    
+    useEffect(() => {
+        const tick = () => {
+            const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+            setSecondsLeft(remaining);
+        };
+        tick();
+        const intervalId = setInterval(tick, 1000);
+        return () => clearInterval(intervalId);
+    }, [deadline]);
 
-        return () => clearTimeout(timer);
-    }, [navigate, username, uID]);
+    useEffect(() => {
+        if (secondsLeft <= 0) {
+            localStorage.removeItem(`deadline-${uID}`);
+            hadTime();
+            navigate("/conversation", { replace: true, state: { username, uID } });
+        }
+    }, [secondsLeft, navigate, username, uID]);
+
+    let conditionText = ""
+    switch (condition) {
+        case "directional":
+            conditionText = "We would like to reemphasize that we are interested in student opinions, and encourage you to share your position openly during the conversation.";
+            break;
+        case "accuracy":
+            conditionText = "We would like to reemphasize that you keep an open mind about the policy during the conversation.";
+            break;
+    }
+
+    useEffect(() => {
+        enoughSetupTimeRef.current = enoughSetupTime;
+    }, [enoughSetupTime]);
 
 
     return (
         <div className="page">
             <div className="box">
+                <div className="header-absolute-right-offset">
+                    <div className="time-remaining-box">
+                        <h3>Conversation begins in: {minutes}:{String(seconds).padStart(2, "0")}</h3>
+                    </div>
+                </div>
                 <h1>Discussion of AI Policy</h1>
                 <div className="box-internal">
                     <p>You will now interact with other students virtually regarding the policy you just received. Both you and the other students saw the same policy. Please take 10 minutes to discuss the topic and the topic only.</p>

@@ -66,6 +66,13 @@
   cursor: pointer;
 }
 
+.next-button:disabled{
+  transform: scale(0.95);
+  background-color: darkgrey;
+  cursor: default;
+}
+
+
 .no-bottom-margin{
   margin-bottom: 0px;
 }

@@ -7,6 +7,8 @@ function PostSurvey({ studyState }) {
     const [initialKnowledge, setInitialKnowledge] = useState(null);
     const [policyOpinion, setPolicyOpinion] = useState(null);
     const [partnerCredibility, setPartnerCredibility] = useState(null);
+    const [chatbotUsage, setChatbotUsage] = useState(null);
+
     const [attentionCheck, setAttentionCheck] = useState(null);
     const [attentionCheckPrime, setAttentionCheckPrime] = useState(null);
 
@@ -23,7 +25,7 @@ function PostSurvey({ studyState }) {
     // const likerts_opinion = ["Strongly Disagree", "Moderately Disagree", "Slightly Disagree", "Neither Agree nor Disagree", "Slightly Agree", "Moderately Agree", "Strongly Agree"];
     const ai_knowledge_options = ["Not knowledgeable at all", "A little knowledgeable", "Somewhat knowledgeable", "Moderately knowledgeable", "Decently knowledgeable", "Very knowledgeable", "Expertly knowledgeable"]
     const partner_credibility = ["Not credible at all", "A little credible", "Somewhat credible", "Moderately credible", "Decently credible", "Very credible", "Extremely credible"]
-
+    const chatbot_usage = ["Never", "Rarely", "A few times a month", "A few times a week", "Daily"];
     const on_button_clicked = async () => {
         if (generalAIAttitude == null || classroomAIAttitude == null || initialKnowledge == null || policyOpinion == null || partnerCredibility == null || attentionCheck == null || attentionCheckPrime == null) {
             setErrorText("Please answer all questions on this page");
@@ -39,6 +41,7 @@ function PostSurvey({ studyState }) {
 
     const save = async () => {
         setButtonText("Loading...");
+        document.getElementById("next-button").disabled = true;
         const condition = studyState.condition;
         const policy = studyState.policy;
         let studyID = studyState.id;
@@ -59,6 +62,7 @@ function PostSurvey({ studyState }) {
                     initialKnowledge,
                     policyOpinion,
                     partnerCredibility,
+                    chatbotUsage,
                     attentionCheck,
                     attentionCheckPrime,
                     secondsTyping,
@@ -75,9 +79,12 @@ function PostSurvey({ studyState }) {
         } catch (err) {
             console.error(err);
             setErrorText("Something went wrong saving your information. Please try again.");
+            setButtonText("Continue");
+            document.getElementById("next-button").disabled = false;
             return false;
         } finally {
             setButtonText("Continue");
+            document.getElementById("next-button").disabled = false;
         }
     }
 
@@ -192,6 +199,27 @@ function PostSurvey({ studyState }) {
                     </div>
                     <br></br>
 
+                    <p>How often do you use AI-based chatbots? (Ex. ChatGPT, Claude)</p>
+                    <div className="row-centered">
+                        {Array.from({ length: 5 }, (_, i) => {
+                            const value = i + 1;
+                            return (
+                            <div className="likert-item" key={value}>
+                                <input
+                                type="radio"
+                                name="chatbotUsage"
+                                value={value}
+                                checked={chatbotUsage === value}
+                                onChange={() => setChatbotUsage(value)}
+                                />
+                                <p>{value}</p>
+                                <p>{chatbot_usage[value-1]}</p>
+                            </div>
+                            );
+                        })}
+                    </div>
+                    <br></br>
+
                     <p>Was the policy that you read and discussed pro-AI in the classrooms or anti-AI in the classrooms?</p>
                     <div className="row-centered">
                         <div className="likert-item" key={"attentionCheck"}>
@@ -241,7 +269,7 @@ function PostSurvey({ studyState }) {
                         </div>
 
                     </div>
-                    <button className="next-button" onClick={on_button_clicked} disabled={buttonText === "Loading..."}>{buttonText}</button>
+                    <button className="next-button" id="next-button" onClick={on_button_clicked} disabled={buttonText === "Loading..."}>{buttonText}</button>
                     <h2 className="error-message">{errorText}</h2>
                 </div>
             </div>

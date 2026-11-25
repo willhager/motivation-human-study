@@ -40,6 +40,7 @@ function Primes({ studyState }) {
 
     const save = async () => {
         setButtonText("Loading...");
+        document.getElementById("next-button").disabled = true;
         let body = ""
         let condition = studyState.condition
         let studyID = studyState.id;
@@ -80,10 +81,13 @@ function Primes({ studyState }) {
             return result.insertedId;
         } catch (err) {
             console.error(err);
+            document.getElementById("next-button").disabled = false;
+            setButtonText("Continue");
             setErrorMessage("Something went wrong saving your information. Please try again.");
             return false;
         } finally {
             setButtonText("Continue");
+            document.getElementById("next-button").disabled = false;
         }
     }
 
@@ -110,7 +114,7 @@ function Primes({ studyState }) {
                 <h1>Written Opinions on AI in Higher Education</h1>
                 <div className="box-internal">
                     <p>{prime}</p>
-                    <p className="p-small-no-margin">{response1.length}/50 chars</p>
+                    <p className="p-small-no-margin">{response1.length}/50 chars minimum</p>
                     {box1}
                     {!box2 && <button className="next-button" onClick={on_button_clicked}>{buttonText}</button> }
                 </div>
@@ -119,7 +123,7 @@ function Primes({ studyState }) {
                         <p>{prime2}</p>
                         <p className="p-small-no-margin">{response2.length}/50 chars</p>
                         {box2}
-                        <button className="next-button" onClick={on_button_clicked}>{buttonText}</button>
+                        <button className="next-button" id="next-button" onClick={on_button_clicked}>{buttonText}</button>
                     </div>
                 }
                 <h2 className="error-message">{errorMessage}</h2>
