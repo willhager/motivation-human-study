@@ -25,7 +25,7 @@ function PostSurvey({ studyState }) {
     // const likerts_opinion = ["Strongly Disagree", "Moderately Disagree", "Slightly Disagree", "Neither Agree nor Disagree", "Slightly Agree", "Moderately Agree", "Strongly Agree"];
     const ai_knowledge_options = ["Not knowledgeable at all", "A little knowledgeable", "Somewhat knowledgeable", "Moderately knowledgeable", "Decently knowledgeable", "Very knowledgeable", "Expertly knowledgeable"]
     const partner_credibility = ["Not credible at all", "A little credible", "Somewhat credible", "Moderately credible", "Decently credible", "Very credible", "Extremely credible"]
-    const chatbot_usage = ["Never", "Rarely", "A few times a month", "A few times a week", "Daily"];
+    const chatbot_usage = ["Never", "Once Every Few Months", "Monthly", "Weekly", "Daily"];
     const on_button_clicked = async () => {
         if (generalAIAttitude == null || classroomAIAttitude == null || initialKnowledge == null || policyOpinion == null || partnerCredibility == null || attentionCheck == null || attentionCheckPrime == null) {
             setErrorText("Please answer all questions on this page");
@@ -199,7 +199,7 @@ function PostSurvey({ studyState }) {
                     </div>
                     <br></br>
 
-                    <p>How often do you use AI-based chatbots? (Ex. ChatGPT, Claude)</p>
+                    <p>How often do you use Chat GPT or other generative AI tools for academic purposes?</p>
                     <div className="row-centered">
                         {Array.from({ length: 5 }, (_, i) => {
                             const value = i + 1;
