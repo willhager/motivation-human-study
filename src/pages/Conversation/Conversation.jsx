@@ -186,7 +186,7 @@ function Conversation( { studyState } ) {
     useEffect(() => {
         if (secondsLeft <= 0) {
             localStorage.removeItem(`deadline-${uID}`);
-            //navigate("/postconversation", { replace: true, state: { username, uID, secondsTyping : secondsTypingRef.current, secondsReading: secondsReadingRef.current} });
+            navigate("/postconversation", { replace: true, state: { username, uID, secondsTyping : secondsTypingRef.current, secondsReading: secondsReadingRef.current} });
         }
     }, [secondsLeft, navigate, username, uID]);
 
@@ -213,15 +213,19 @@ function Conversation( { studyState } ) {
 
     return (
         <div className="conversation-page">
-            <div className="header-absolute-right-offset">
+            {/* <div className="header-absolute-right-offset">
                 <div className="time-remaining-box">
                     <h3>Timer: {minutes}:{String(seconds).padStart(2, "0")} remaining</h3>
                 </div>
-            </div>
+            </div> */}
 
 
             <div className="two-column">
+                
                 <div className="conversation-description">
+                    <div className="time-remaining-box">
+                        <h3>Timer: {minutes}:{String(seconds).padStart(2, "0")} remaining</h3>
+                    </div>
                     <h1>Discussion of AI Policy</h1>
                     <p>With the rapid pace of advancement in the artificial intelligence (AI) field, your state university system is currently considering whether or not to create policy and regulation around the use of AI in the classroom. {policyText} Please discuss the policy you were shown with others. {conditionText}</p>
                     <button className="next-button" onClick={() => setInstructionPopup(true)}>View Full Instructions</button>
@@ -252,7 +256,7 @@ function Conversation( { studyState } ) {
                                                     hour12: false,
                                                     })}</h4>
                                             </div>
-                                            {item.replyingTo && <p className="conversation-p-small-no-margin" onClick={() => {
+                                            {item.replyingTo && <p  onClick={() => {
                                                                                                                     const el = document.getElementById(item.replyingTo);
                                                                                                                     if (!el) return;
                                                                                                                     el.scrollIntoView({ behavior: "smooth", block: "center" });

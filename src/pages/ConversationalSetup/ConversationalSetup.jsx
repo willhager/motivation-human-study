@@ -2,14 +2,14 @@ import {useLocation, useNavigate} from "react-router-dom";
 import { useEffect , useState, useRef} from "react";
 
 function ConversationalSetup({studyState}) {
-    const [enoughSetupTime, setEnoughSetupTime] = useState(false)
-    const enoughSetupTimeRef = useRef();
+    const [enoughSetupTime_setup, setEnoughSetupTime_setup] = useState(false)
+    const enoughSetupTime_setupRef = useRef();
     const navigate = useNavigate();
     const state = useLocation();
     const {username, uID, insertedID} = state.state;
     const condition = studyState.condition;
 
-    const TOTAL_SECONDS = 120;
+    const TOTAL_SECONDS_setup = 120;
     
     const [deadline] = useState(() => {
         const key = `deadline-${uID}`;
@@ -17,18 +17,18 @@ function ConversationalSetup({studyState}) {
         if (saved) {
             return Number(saved);
         }
-        const newDeadline = Date.now() + TOTAL_SECONDS * 1000;
+        const newDeadline = Date.now() + TOTAL_SECONDS_setup * 1000;
         localStorage.setItem(key, String(newDeadline));
         return newDeadline;
     });    
 
-    const [secondsLeft, setSecondsLeft] = useState(TOTAL_SECONDS);
+    const [secondsLeft_setup, setSecondsLeft_setup] = useState(TOTAL_SECONDS_setup);
 
-    const minutes = Math.floor(secondsLeft / 60);
-    const seconds = secondsLeft % 60;
+    const minutes = Math.floor(secondsLeft_setup / 60);
+    const seconds = secondsLeft_setup % 60;
 
     const hadTime = async () => {
-            console.log(enoughSetupTime);
+            console.log(enoughSetupTime_setup);
             try {
                 const res = await fetch(`/.netlify/functions/primes?id=${insertedID}`, {
                     method: "PATCH",
@@ -36,7 +36,7 @@ function ConversationalSetup({studyState}) {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        enoughSetupTime: enoughSetupTimeRef.current,
+                        enoughSetupTime_setup: enoughSetupTime_setupRef.current,
                         timestamp: new Date().toISOString(),
                     }),
                 });
@@ -52,7 +52,7 @@ function ConversationalSetup({studyState}) {
     useEffect(() => {
         const tick = () => {
             const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
-            setSecondsLeft(remaining);
+            setSecondsLeft_setup(remaining);
         };
         tick();
         const intervalId = setInterval(tick, 1000);
@@ -60,12 +60,12 @@ function ConversationalSetup({studyState}) {
     }, [deadline]);
 
     useEffect(() => {
-        if (secondsLeft <= 0) {
+        if (secondsLeft_setup <= 0) {
             localStorage.removeItem(`deadline-${uID}`);
             hadTime();
             navigate("/conversation", { replace: true, state: { username, uID } });
         }
-    }, [secondsLeft, navigate, username, uID]);
+    }, [secondsLeft_setup, navigate, username, uID]);
 
     let conditionText = ""
     switch (condition) {
@@ -78,8 +78,8 @@ function ConversationalSetup({studyState}) {
     }
 
     useEffect(() => {
-        enoughSetupTimeRef.current = enoughSetupTime;
-    }, [enoughSetupTime]);
+        enoughSetupTime_setupRef.current = enoughSetupTime_setup;
+    }, [enoughSetupTime_setup]);
 
 
     return (
@@ -108,7 +108,7 @@ function ConversationalSetup({studyState}) {
                     <p>This page will automatically redirect you to the next part of the study.</p>
                     <div className="row-centered">
                         <p>Check this if you had enough time to read all of the text on this page. Note that this has no effect on your reward and is merely used to help calibrate future iterations of the study.</p>
-                        <input className="input-short" type="checkbox" checked={enoughSetupTime} onChange={e => setEnoughSetupTime(e.target.checked)}></input>
+                        <input className="input-short" type="checkbox" checked={enoughSetupTime_setup} onChange={e => setEnoughSetupTime_setup(e.target.checked)}></input>
                     </div>
                 </div>
             </div>

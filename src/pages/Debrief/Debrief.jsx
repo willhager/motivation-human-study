@@ -51,8 +51,8 @@ function Debrief({ studyState }) {
         <div className="page">
             <div className="box">
                 <div className="box-internal">
-                    <h2>Study Debrief:</h2>
-                    <p>Thank you for participating in our study! Please read the following document and make a consent statement below.</p>
+                    <h2>Consent to Data Use</h2>
+                    <p>The study is almost complete. Please take a minute to read the consent document below and select whether you agree to data usage.</p>
                     <object className="consent-embedding" data={"/consent_to_data_use.pdf"} type="application/pdf">
                         <p>
                             There was an error displaying the PDF. <a href={"/consent_to_procedures.pdf"}>Download it instead</a>.
